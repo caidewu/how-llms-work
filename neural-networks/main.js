@@ -101,7 +101,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 })();
 
 // ═══════════════════════════════════════════════
-// PROGRESS BAR + SCROLL NAV
+// 进度条 + 滚动导航
 // ═══════════════════════════════════════════════
 (function(){
   const bar = document.getElementById('progress-bar');
@@ -134,7 +134,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 })();
 
 // ═══════════════════════════════════════════════
-// FADE-UP OBSERVER
+// 淡入观察器
 // ═══════════════════════════════════════════════
 (function(){
   const observer = new IntersectionObserver(entries => {
@@ -159,7 +159,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 })();
 
 // ═══════════════════════════════════════════════
-// MLP ARCHITECTURE SVG
+// MLP 架构 SVG
 // ═══════════════════════════════════════════════
 (function(){
   const svg = document.getElementById('mlp-svg');
@@ -188,7 +188,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 })();
 
 // ═══════════════════════════════════════════════
-// DEMO 1: NEURON PLAYGROUND
+// 演示 1: 神经元游乐场
 // ═══════════════════════════════════════════════
 (function(){
   const w1El = document.getElementById('np-w1');
@@ -273,7 +273,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 })();
 
 // ═══════════════════════════════════════════════
-// DEMO 2: FORWARD PASS VISUALIZER
+// 演示 2: 前向传播可视化
 // ═══════════════════════════════════════════════
 (function(){
   const svg = document.getElementById('fp-svg');
@@ -367,7 +367,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 })();
 
 // ═══════════════════════════════════════════════
-// DEMO 3: LOSS LANDSCAPE
+// 演示 3: 损失地形
 // ═══════════════════════════════════════════════
 (function(){
   const canvas = document.getElementById('loss-canvas');

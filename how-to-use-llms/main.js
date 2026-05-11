@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════
-// HERO CANVAS — Floating Usage Words
+// HERO CANVAS — 漂浮的使用场景词汇
 // ═══════════════════════════════════════════════
 (function(){
   const canvas = document.getElementById('hero-canvas');
@@ -50,7 +50,7 @@
 })();
 
 // ═══════════════════════════════════════════════
-// TYPEWRITER
+// 打字机效果
 // ═══════════════════════════════════════════════
 (function(){
   const el = document.getElementById('tw-response');
@@ -86,7 +86,7 @@
 })();
 
 // ═══════════════════════════════════════════════
-// THINKING DEMO
+// 推理演示
 // ═══════════════════════════════════════════════
 (function(){
   const stepsEl = document.getElementById('thinking-steps');
@@ -143,7 +143,7 @@
 })();
 
 // ═══════════════════════════════════════════════
-// RESEARCH PIPELINE
+// 研究流程
 // ═══════════════════════════════════════════════
 (function(){
   const runBtn = document.getElementById('rp-run-btn');
@@ -183,7 +183,7 @@
 })();
 
 // ═══════════════════════════════════════════════
-// CODE DEMO + CHART
+// 代码演示 + 图表
 // ═══════════════════════════════════════════════
 (function(){
   const runBtn = document.getElementById('code-run-btn');
@@ -299,7 +299,7 @@
 })();
 
 // ═══════════════════════════════════════════════
-// AGENT LOOP ANIMATION
+// Agent 循环动画
 // ═══════════════════════════════════════════════
 (function(){
   const runBtn = document.getElementById('al-run-btn');
@@ -329,7 +329,7 @@
 })();
 
 // ═══════════════════════════════════════════════
-// SCROLL OBSERVER — Animations + Nav + Progress
+// 滚动观察器 — 动画 + 导航 + 进度条
 // ═══════════════════════════════════════════════
 (function(){
   const sections = document.querySelectorAll('.section');
