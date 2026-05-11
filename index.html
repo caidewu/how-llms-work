@@ -1,64 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How LLMs Work — A Visual Deep Dive</title>
+<title>大语言模型是如何工作的 — 可视化深度解析</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">跳转到主要内容</a>
 
-<!-- Progress Bar -->
-<div class="progress-bar" id="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+<!-- 进度条 -->
+<div class="progress-bar" id="progress-bar" role="progressbar" aria-label="阅读进度" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
-<!-- Top Nav -->
-<nav class="top-nav" id="top-nav" aria-label="Chapter navigation">
+<!-- 顶部导航 -->
+<nav class="top-nav" id="top-nav" aria-label="章节导航">
   <div class="top-nav-inner">
-    <span class="top-nav-brand" aria-hidden="true">How LLMs Work</span>
+    <span class="top-nav-brand" aria-hidden="true">大语言模型是如何工作的</span>
     <div class="top-nav-links" id="top-nav-links">
       <a href="how-to-use-llms/index.html" style="font-family:var(--ds);font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;padding:5px 11px;border-radius:6px;border:1px solid rgba(99,91,255,0.3);background:rgba(99,91,255,0.05);white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:.15s;margin-right:4px" onmouseover="this.style.background='rgba(99,91,255,0.1)'" onmouseout="this.style.background='rgba(99,91,255,0.05)'">Part 2 →</a>
       <a href="neural-networks/index.html" style="font-family:var(--ds);font-size:12px;font-weight:600;color:var(--green);text-decoration:none;padding:5px 11px;border-radius:6px;border:1px solid rgba(0,135,90,0.3);background:rgba(0,135,90,0.05);white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:.15s;margin-right:6px" onmouseover="this.style.background='rgba(0,135,90,0.1)'" onmouseout="this.style.background='rgba(0,135,90,0.05)'">Part 3 →</a>
-      <button class="tnav-btn active" data-section="s-intro" aria-current="true">Intro</button>
-      <button class="tnav-btn" data-section="s-data">Data</button>
-      <button class="tnav-btn" data-section="s-tokenizer">Tokens</button>
-      <button class="tnav-btn" data-section="s-training">Training</button>
-      <button class="tnav-btn" data-section="s-inference">Inference</button>
-      <button class="tnav-btn" data-section="s-basemodel">Base Model</button>
-      <button class="tnav-btn" data-section="s-posttraining">Post-Train</button>
-      <button class="tnav-btn" data-section="s-psychology">Psychology</button>
+      <button class="tnav-btn active" data-section="s-intro" aria-current="true">简介</button>
+      <button class="tnav-btn" data-section="s-data">数据</button>
+      <button class="tnav-btn" data-section="s-tokenizer">分词</button>
+      <button class="tnav-btn" data-section="s-training">训练</button>
+      <button class="tnav-btn" data-section="s-inference">推理</button>
+      <button class="tnav-btn" data-section="s-basemodel">基础模型</button>
+      <button class="tnav-btn" data-section="s-posttraining">后训练</button>
+      <button class="tnav-btn" data-section="s-psychology">心理学</button>
       <button class="tnav-btn" data-section="s-rag">RAG</button>
-      <button class="tnav-btn" data-section="s-security">Security</button>
-      <button class="tnav-btn" data-section="s-summary">Pipeline</button>
+      <button class="tnav-btn" data-section="s-security">安全</button>
+      <button class="tnav-btn" data-section="s-summary">流程</button>
     </div>
   </div>
 </nav>
 
-<!-- ━━━━━━━━ SECTION 1: HERO ━━━━━━━━ -->
-<section id="s-intro" class="section" aria-label="Introduction">
+<!-- ━━━━━━━━ 第 1 节：首屏 ━━━━━━━━ -->
+<section id="s-intro" class="section" aria-label="简介">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-content" id="main-content">
-    <div class="chapter-badge" aria-hidden="true">A Visual Deep Dive</div>
+    <div class="chapter-badge" aria-hidden="true">可视化深度解析</div>
     <div class="hero-grid">
       <div class="hero-left">
-        <h1 class="hero-title">How LLMs<br><span>Actually</span> Work</h1>
-        <p class="hero-sub">A complete walkthrough of how large language models like ChatGPT are built — from raw internet text to a conversational assistant. Based on Andrej Karpathy's technical deep dive.</p>
+        <h1 class="hero-title">大语言模型<br><span>究竟</span>是如何工作的</h1>
+        <p class="hero-sub">完整讲解 ChatGPT 等大语言模型是如何构建的——从原始互联网文本到对话助手。基于 Andrej Karpathy 的技术深度解析。</p>
         <dl class="hero-stats">
-          <div class="stat-item"><dt class="stat-lbl">Training Tokens</dt><dd class="stat-val">15T</dd></div>
-          <div class="stat-item"><dt class="stat-lbl">Parameters</dt><dd class="stat-val">405B</dd></div>
-          <div class="stat-item"><dt class="stat-lbl">Text Data</dt><dd class="stat-val">44 TB</dd></div>
-          <div class="stat-item"><dt class="stat-lbl">Token Vocabulary</dt><dd class="stat-val">100K</dd></div>
+          <div class="stat-item"><dt class="stat-lbl">训练 Token 数</dt><dd class="stat-val">15T</dd></div>
+          <div class="stat-item"><dt class="stat-lbl">参数量</dt><dd class="stat-val">405B</dd></div>
+          <div class="stat-item"><dt class="stat-lbl">文本数据</dt><dd class="stat-val">44 TB</dd></div>
+          <div class="stat-item"><dt class="stat-lbl">Token 词表</dt><dd class="stat-val">100K</dd></div>
         </dl>
-        <p class="stats-caveat">Representative figures from frontier models circa 2024 — exact numbers shift with every release. The scale is the point, not the precision.</p>
-        <div class="scroll-hint" aria-hidden="true"><div class="scroll-arrow"></div>Scroll to explore</div>
+        <p class="stats-caveat">2024 年前沿模型的代表性数据——具体数字随每次发布而变化。重要的是规模，而非精确度。</p>
+        <div class="scroll-hint" aria-hidden="true"><div class="scroll-arrow"></div>滚动探索</div>
       </div>
       <div class="hero-right">
-        <div class="typewriter-wrap" aria-label="Example LLM conversation">
-          <div class="tw-label" aria-hidden="true">Live LLM Response</div>
-          <div class="tw-prompt">Human: What is behind this text box?</div>
+        <div class="typewriter-wrap" aria-label="LLM 对话示例">
+          <div class="tw-label" aria-hidden="true">实时 LLM 回复</div>
+          <div class="tw-prompt">人类：这个文本框后面是什么？</div>
           <div class="tw-response" id="tw-response" aria-live="polite" aria-atomic="true"><span class="tw-cursor" aria-hidden="true"></span></div>
         </div>
       </div>
@@ -66,153 +66,153 @@
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION 2: DATA COLLECTION ━━━━━━━━ -->
-<section id="s-data" class="section" aria-label="Data Collection">
+<!-- ━━━━━━━━ 第 2 节：数据采集 ━━━━━━━━ -->
+<section id="s-data" class="section" aria-label="数据采集">
   <div class="section-inner two-col">
     <div class="col-text fade-up">
-      <div class="chapter-badge" aria-hidden="true">Chapter 1 · Pre-Training · Stage 1</div>
-      <h2 class="section-title">Downloading<br>the Internet</h2>
-      <p class="body-text">The first step is collecting an enormous amount of text. Organizations like <span class="highlight">Common Crawl</span> have been crawling the web since 2007 — indexing 2.7 billion pages by 2024. This raw data is then filtered into a high-quality dataset like <span class="highlight">FineWeb</span>.</p>
-      <p class="body-text">The goal: <em>large quantity</em> of <em>high quality</em>, <em>diverse</em> documents. After aggressive filtering, you end up with about <span class="highlight-a">44 terabytes</span> — roughly 10 consumer hard drives worth of text — representing ~15 trillion tokens.</p>
+      <div class="chapter-badge" aria-hidden="true">第 1 章 · 预训练 · 阶段 1</div>
+      <h2 class="section-title">下载<br>整个互联网</h2>
+      <p class="body-text">第一步是收集海量文本。<span class="highlight">Common Crawl</span> 等组织自 2007 年起就开始爬取网页——到 2024 年已索引 27 亿个页面。这些原始数据随后被过滤成高质量数据集，如 <span class="highlight">FineWeb</span>。</p>
+      <p class="body-text">目标：<em>大量</em> <em>高质量</em>、<em>多样化</em> 的文档。经过严格过滤后，最终得到约 <span class="highlight-a">44 TB</span>——大约相当于 10 块消费级硬盘的文本量——约 15 万亿个 token。</p>
       <div class="insight-box">
-        <strong>Key Insight</strong>
-        The quality and diversity of this training data has more impact on the final model than almost anything else. Garbage in, garbage out — but at a trillion-token scale.
+        <strong>关键洞察</strong>
+        训练数据的质量和多样性对最终模型的影响几乎超过其他一切因素。垃圾进，垃圾出——只不过是在万亿 token 的规模上。
       </div>
     </div>
     <div class="col-text fade-up" style="animation-delay:.15s">
-      <p class="pipeline-hint">Click any stage to read more detail</p>
-      <div class="data-flow" id="pipeline-flow" role="list" aria-label="Data processing pipeline stages">
-        <div class="pipeline-node active" data-stage="0" role="button" tabindex="0" aria-expanded="true" aria-label="Common Crawl — click to expand">
+      <p class="pipeline-hint">点击任意阶段查看详情</p>
+      <div class="data-flow" id="pipeline-flow" role="list" aria-label="数据处理流程阶段">
+        <div class="pipeline-node active" data-stage="0" role="button" tabindex="0" aria-expanded="true" aria-label="Common Crawl — 点击展开">
           <div class="pn-title">🌐 Common Crawl</div>
-          <div class="pn-sub">2.7B web pages · Raw HTML · Since 2007</div>
-          <div class="pn-detail">A non-profit organization that crawls the web and freely provides its data. Their bots follow links from seed pages, recursively indexing the internet. The raw archive is petabytes of gzip'd WARC files containing raw HTML.</div>
+          <div class="pn-sub">27 亿网页 · 原始 HTML · 始于 2007</div>
+          <div class="pn-detail">一个爬取网页并免费提供数据的非营利组织。它们的机器人从种子页面开始跟踪链接，递归地索引整个互联网。原始档案是数 PB 的 gzip 压缩 WARC 文件，包含原始 HTML。</div>
         </div>
         <div class="pipeline-arrow" id="pa-0" aria-hidden="true">↓</div>
-        <div class="pipeline-node" data-stage="1" role="button" tabindex="0" aria-expanded="false" aria-label="URL Filtering — click to expand">
-          <div class="pn-title">🚫 URL Filtering</div>
-          <div class="pn-sub">Blocklists · Malware · Spam · Adult content</div>
-          <div class="pn-detail">Block-lists of known malware sites, spam networks, adult content, marketing pages, and low-quality domains are applied. Entire domains can be removed. This is the cheapest filter so it runs first.</div>
+        <div class="pipeline-node" data-stage="1" role="button" tabindex="0" aria-expanded="false" aria-label="URL 过滤 — 点击展开">
+          <div class="pn-title">🚫 URL 过滤</div>
+          <div class="pn-sub">黑名单 · 恶意软件 · 垃圾信息 · 成人内容</div>
+          <div class="pn-detail">应用已知恶意软件站点、垃圾邮件网络、成人内容、营销页面和低质量域名的黑名单。整个域名都可以被移除。这是最便宜的过滤器，因此最先运行。</div>
         </div>
         <div class="pipeline-arrow" id="pa-1" aria-hidden="true">↓</div>
-        <div class="pipeline-node" data-stage="2" role="button" tabindex="0" aria-expanded="false" aria-label="Text Extraction — click to expand">
-          <div class="pn-title">📄 Text Extraction</div>
-          <div class="pn-sub">HTML → clean text · Remove navigation &amp; CSS</div>
-          <div class="pn-detail">Raw HTML contains &lt;div&gt; tags, CSS, JavaScript, navigation menus, and ads. Parsers extract just the meaningful text content. This is harder than it sounds — heuristics decide what's "content" vs "chrome".</div>
+        <div class="pipeline-node" data-stage="2" role="button" tabindex="0" aria-expanded="false" aria-label="文本提取 — 点击展开">
+          <div class="pn-title">📄 文本提取</div>
+          <div class="pn-sub">HTML → 纯文本 · 移除导航栏和 CSS</div>
+          <div class="pn-detail">原始 HTML 包含 &lt;div&gt; 标签、CSS、JavaScript、导航菜单和广告。解析器只提取有意义的文本内容。这比听起来更难——启发式规则决定什么是"内容"，什么是"装饰"。</div>
         </div>
         <div class="pipeline-arrow" id="pa-2" aria-hidden="true">↓</div>
-        <div class="pipeline-node" data-stage="3" role="button" tabindex="0" aria-expanded="false" aria-label="Language Filtering — click to expand">
-          <div class="pn-title">🌍 Language Filtering</div>
-          <div class="pn-sub">Keep pages ≥65% English · Language classifier</div>
-          <div class="pn-detail">A language classifier estimates the language of each page. Pages with less than 65% target-language content are dropped. This is a design decision — filter aggressively for one language or train multilingual.</div>
+        <div class="pipeline-node" data-stage="3" role="button" tabindex="0" aria-expanded="false" aria-label="语言过滤 — 点击展开">
+          <div class="pn-title">🌍 语言过滤</div>
+          <div class="pn-sub">保留 ≥65% 英文的页面 · 语言分类器</div>
+          <div class="pn-detail">语言分类器估计每页的语言。目标语言内容少于 65% 的页面被丢弃。这是一个设计决策——可以严格过滤单一语言，也可以训练多语言模型。</div>
         </div>
         <div class="pipeline-arrow" id="pa-3" aria-hidden="true">↓</div>
-        <div class="pipeline-node" data-stage="4" role="button" tabindex="0" aria-expanded="false" aria-label="Deduplication — click to expand">
-          <div class="pn-title">♻️ Deduplication</div>
-          <div class="pn-sub">Exact &amp; fuzzy matching · Reduce repetition</div>
-          <div class="pn-detail">Identical or near-identical pages appear millions of times on the internet (copied articles, boilerplate). Training on the same text repeatedly causes memorization. Dedup uses MinHash and exact-match techniques to remove duplicates.</div>
+        <div class="pipeline-node" data-stage="4" role="button" tabindex="0" aria-expanded="false" aria-label="去重 — 点击展开">
+          <div class="pn-title">♻️ 去重</div>
+          <div class="pn-sub">精确和模糊匹配 · 减少重复</div>
+          <div class="pn-detail">互联网上相同或几乎相同的页面出现数百万次（复制文章、模板内容）。反复训练相同文本会导致记忆。去重使用 MinHash 和精确匹配技术来移除重复内容。</div>
         </div>
         <div class="pipeline-arrow" id="pa-4" aria-hidden="true">↓</div>
-        <div class="pipeline-node" data-stage="5" role="button" tabindex="0" aria-expanded="false" aria-label="PII Removal — click to expand">
-          <div class="pn-title">🔒 PII Removal</div>
-          <div class="pn-sub">Names · Addresses · SSNs · Emails</div>
-          <div class="pn-detail">Personally Identifiable Information is detected and either redacted or the page is dropped. Regex patterns and ML classifiers find phone numbers, emails, Social Security numbers, physical addresses, and named individuals.</div>
+        <div class="pipeline-node" data-stage="5" role="button" tabindex="0" aria-expanded="false" aria-label="PII 移除 — 点击展开">
+          <div class="pn-title">🔒 个人信息移除</div>
+          <div class="pn-sub">姓名 · 地址 · 社保号 · 邮箱</div>
+          <div class="pn-detail">检测个人身份信息，要么编辑处理，要么丢弃整个页面。正则表达式模式和机器学习分类器查找电话号码、邮箱、社保号、物理地址和具名个人。</div>
         </div>
         <div class="pipeline-arrow" id="pa-5" aria-hidden="true">↓</div>
-        <div class="pipeline-node" style="border-color:rgba(0,214,143,0.3);background:rgba(0,214,143,0.04)" data-stage="6" role="button" tabindex="0" aria-expanded="false" aria-label="FineWeb Dataset result — click to expand">
-          <div class="pn-title" style="color:var(--green)">✅ FineWeb Dataset</div>
-          <div class="pn-sub">44 TB · 15 Trillion tokens · High quality</div>
-          <div class="pn-detail">The final filtered dataset. Articles about tornadoes in 2012, medical facts, history, code, recipes, science papers — the full breadth of human knowledge expressed in text. This becomes the training corpus.</div>
+        <div class="pipeline-node" style="border-color:rgba(0,214,143,0.3);background:rgba(0,214,143,0.04)" data-stage="6" role="button" tabindex="0" aria-expanded="false" aria-label="FineWeb 数据集结果 — 点击展开">
+          <div class="pn-title" style="color:var(--green)">✅ FineWeb 数据集</div>
+          <div class="pn-sub">44 TB · 15 万亿 token · 高质量</div>
+          <div class="pn-detail">最终过滤后的数据集。2012 年龙卷风的文章、医学事实、历史、代码、食谱、科学论文——人类知识在文本中的完整表达。这成为训练语料库。</div>
         </div>
       </div>
-      <button class="btn btn-ghost btn-sm" style="margin-top:14px" id="run-pipeline-btn">▶ Animate Pipeline</button>
+      <button class="btn btn-ghost btn-sm" style="margin-top:14px" id="run-pipeline-btn">▶ 播放流程动画</button>
     </div>
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION 3: TOKENIZATION ━━━━━━━━ -->
-<section id="s-tokenizer" class="section" aria-label="Tokenization">
+<!-- ━━━━━━━━ 第 3 节：分词 ━━━━━━━━ -->
+<section id="s-tokenizer" class="section" aria-label="分词">
   <div class="section-inner">
     <div class="two-col" style="margin-bottom:48px">
       <div class="fade-up">
-        <div class="chapter-badge">Chapter 1 · Pre-Training · Stage 2</div>
-        <h2 class="section-title">Tokenization</h2>
-        <p class="body-text">Neural networks can't process raw text — they need numbers. The solution is <span class="highlight">tokenization</span>: breaking text into "tokens" (sub-word chunks) and assigning each an ID.</p>
-        <p class="body-text">GPT-4 uses a vocabulary of <span class="highlight">100,277 tokens</span>, built via the <span class="highlight-a">Byte Pair Encoding (BPE)</span> algorithm. BPE starts with individual bytes (256 symbols), then iteratively merges the most frequent adjacent pairs — compressing the sequence length while expanding the vocabulary.</p>
+        <div class="chapter-badge">第 1 章 · 预训练 · 阶段 2</div>
+        <h2 class="section-title">分词</h2>
+        <p class="body-text">神经网络无法直接处理原始文本 — 它们需要数字。解决方案是 <span class="highlight">分词（tokenization）</span>：将文本拆分为"token"（子词片段），并为每个分配一个 ID。</p>
+        <p class="body-text">GPT-4 使用包含 <span class="highlight">100,277 个 token</span> 的词表，通过 <span class="highlight-a">Byte Pair Encoding (BPE)</span> 算法构建。BPE 从单个字节（256 个符号）开始，然后迭代合并最频繁的相邻字符对 — 在压缩序列长度的同时扩展词表。</p>
         <div class="insight-box">
-          <strong>Why not just use words?</strong>
-          Words have infinite variants. "run", "running", "runner" would be 3 separate entries. Subword tokens share roots: "run" + "ning", "run" + "ner". This also handles new words, typos, and multiple languages efficiently.
+          <strong>为什么不直接用单词？</strong>
+          单词有无限种变体。"run"、"running"、"runner" 会是 3 个独立条目。子词 token 共享词根："run" + "ning"、"run" + "ner"。这也能高效处理新词、拼写错误和多语言。
         </div>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
-        <h3 class="sub-title">BPE in Action</h3>
-        <svg id="bpe-svg" viewBox="0 0 380 280" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block" role="img" aria-labelledby="bpe-title" aria-describedby="bpe-desc"><title id="bpe-title">BPE Tokenization Steps</title><desc id="bpe-desc">Interactive diagram showing how Byte Pair Encoding progressively merges characters into subword tokens</desc></svg>
+        <h3 class="sub-title">BPE 实战</h3>
+        <svg id="bpe-svg" viewBox="0 0 380 280" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block" role="img" aria-labelledby="bpe-title" aria-describedby="bpe-desc"><title id="bpe-title">BPE 分词步骤</title><desc id="bpe-desc">交互式图表展示 Byte Pair Encoding 如何逐步将字符合并为子词 token</desc></svg>
         <div style="margin-top:10px;display:flex;align-items:center;gap:12px">
-          <button class="btn btn-ghost btn-sm" id="bpe-advance-btn" aria-label="Advance to next BPE step">Next Step →</button>
-          <span id="bpe-step-label" style="font-family:var(--dm);font-size:11px;color:var(--txt2)">Step 1 of 5</span>
+          <button class="btn btn-ghost btn-sm" id="bpe-advance-btn" aria-label="进入下一步 BPE">下一步 →</button>
+          <span id="bpe-step-label" style="font-family:var(--dm);font-size:11px;color:var(--txt2)">第 1 步，共 5 步</span>
         </div>
       </div>
     </div>
     <div class="fade-up" style="animation-delay:.2s">
-      <a href="https://tiktokenizer.vercel.app/" target="_blank" rel="noopener" class="tiktokenizer-link">Try the real tokenizer → tiktokenizer.vercel.app</a>
+      <a href="https://tiktokenizer.vercel.app/" target="_blank" rel="noopener" class="tiktokenizer-link">试试真实的分词器 → tiktokenizer.vercel.app</a>
     </div>
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION 4: NEURAL NETWORK TRAINING ━━━━━━━━ -->
-<section id="s-training" class="section" aria-label="Neural Network Training">
+<!-- ━━━━━━━━ 第 4 节：神经网络训练 ━━━━━━━━ -->
+<section id="s-training" class="section" aria-label="神经网络训练">
   <div class="section-inner">
     <div class="two-col" style="margin-bottom:48px">
       <div class="fade-up">
-        <div class="chapter-badge">Chapter 1 · Pre-Training · Stage 3</div>
-        <h2 class="section-title">Training the<br>Neural Network</h2>
-        <p class="body-text">The Transformer neural network is initialized with random parameters — billions of <span class="highlight">"knobs"</span>. Training adjusts these knobs so the network gets better at predicting the next token in any sequence.</p>
-        <p class="body-text">Every training step: sample a window of tokens → feed to network → compare prediction to actual next token → nudge all parameters slightly in the right direction. Repeat <span class="highlight-a">billions of times</span>.</p>
-        <p class="body-text">The <span class="highlight">loss</span> — a single number measuring prediction error — falls steadily as the model learns the statistical patterns of human language.</p>
+        <div class="chapter-badge">第 1 章 · 预训练 · 阶段 3</div>
+        <h2 class="section-title">训练<br>神经网络</h2>
+        <p class="body-text">Transformer 神经网络以随机参数初始化 — 数十亿个 <span class="highlight">"旋钮"</span>。训练通过调整这些旋钮，使网络更擅长预测序列中的下一个 token。</p>
+        <p class="body-text">每个训练步骤：采样一个 token 窗口 → 输入网络 → 将预测结果与实际下一个 token 比较 → 将所有参数向正确方向微调。重复 <span class="highlight-a">数十亿次</span>。</p>
+        <p class="body-text"><span class="highlight">损失（loss）</span> — 一个衡量预测误差的单一数值 — 随着模型学习人类语言的统计规律而稳步下降。</p>
         <div class="insight-box">
-          <strong>Scale</strong>
-          GPT-2 (2019): 1.6B params, 100B tokens, ~$40K to train. Today: same quality for ~$100. Llama 3: 405B params, 15T tokens. Modern frontier models: hundreds of billions of parameters, trillions of tokens.
+          <strong>规模</strong>
+          GPT-2（2019）：16 亿参数，1000 亿 token，训练成本约 4 万美元。今天：同等质量约 100 美元。Llama 3：4050 亿参数，15 万亿 token。现代前沿模型：数千亿参数，数万亿 token。
         </div>
         <div class="insight-box" style="margin-top:14px">
-          <strong>Scaling Laws</strong>
-          Model accuracy is a smooth, predictable function of just two variables: <em>N</em> (number of parameters) and <em>D</em> (training tokens). These trends show no signs of plateauing — bigger model + more data = reliably better results. Algorithmic breakthroughs are a bonus, but simply scaling compute is a near-guaranteed path to improvement. This is why AI labs are in a GPU arms race.
+          <strong>扩展定律（扩展定律）</strong>
+          模型准确率是两个变量的平滑、可预测函数：<em>N</em>（参数数量）和 <em>D</em>（训练 token 数）。这些趋势没有放缓迹象 — 更大的模型 + 更多数据 = 稳定更好的结果。算法突破是锦上添花，但简单地扩展计算量就是一条近乎保证的改进路径。这就是为什么 AI 实验室正在进行 GPU 军备竞赛。
         </div>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
-        <h3 class="sub-title">Transformer Architecture</h3>
-        <svg id="transformer-svg" viewBox="0 0 360 340" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block;margin-bottom:16px" role="img" aria-label="Transformer architecture diagram showing data flow from input tokens through embedding, attention, and feed-forward layers to output logits"><title>Transformer Architecture</title></svg>
+        <h3 class="sub-title">Transformer 架构</h3>
+        <svg id="transformer-svg" viewBox="0 0 360 340" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block;margin-bottom:16px" role="img" aria-label="Transformer 架构图，展示数据从输入 token 经过嵌入层、注意力层和前馈层流向输出 logits 的过程"><title>Transformer 架构</title></svg>
         <div class="insight-box">
-          <strong>What is an Embedding?</strong>
-          Each token ID maps to a learned vector of ~1,000–4,000 numbers called its <em>embedding</em>. Think of it as a coordinate in meaning-space — initialized randomly, then shaped by training. The same token (e.g. "bank") always enters the network with the same embedding vector. <em>Attention layers</em> then mix in context from surrounding tokens, so by the time "bank" reaches deeper layers, "river bank" and "bank account" carry completely different representations. Polysemy is resolved by context, not by storing multiple meanings per token.
+          <strong>什么是嵌入（Embedding）？</strong>
+          每个 token ID 映射到一个约 1,000–4,000 个数字的学习向量，称为其 <em>嵌入</em>。可以把它想象成语义空间中的一个坐标 — 随机初始化，然后由训练塑造。同一个 token（例如 "bank"）始终以相同的嵌入向量进入网络。<em>注意力层</em> 随后混入周围 token 的上下文，因此当 "bank" 到达更深层时，"river bank" 和 "bank account" 携带完全不同的表示。一词多义由上下文解决，而非为每个 token 存储多个含义。
         </div>
       </div>
     </div>
     <div class="fade-up" style="animation-delay:.2s">
       <div class="two-col" style="gap:32px">
         <div>
-          <p style="font-family:var(--dm);font-size:11px;color:var(--txt2);margin-bottom:10px">Select a training stage to see model output quality</p>
-          <div class="training-stages" id="training-stages" role="group" aria-label="Training step selector">
-            <button class="stage-btn" data-step="1" aria-pressed="false">Step 1<br><span style="color:var(--red)">Loss: 11.2</span></button>
-            <button class="stage-btn active" data-step="500" aria-pressed="true">Step 500<br><span style="color:var(--amber)">Loss: 4.8</span></button>
-            <button class="stage-btn" data-step="5000" aria-pressed="false">Step 5K<br><span style="color:var(--purple)">Loss: 3.1</span></button>
-            <button class="stage-btn" data-step="32000" aria-pressed="false">Step 32K<br><span style="color:var(--green)">Loss: 2.4</span></button>
+          <p style="font-family:var(--dm);font-size:11px;color:var(--txt2);margin-bottom:10px">选择训练阶段查看模型输出质量</p>
+          <div class="training-stages" id="training-stages" role="group" aria-label="训练步骤选择器">
+            <button class="stage-btn" data-step="1" aria-pressed="false">第 1 步<br><span style="color:var(--red)">Loss: 11.2</span></button>
+            <button class="stage-btn active" data-step="500" aria-pressed="true">第 500 步<br><span style="color:var(--amber)">Loss: 4.8</span></button>
+            <button class="stage-btn" data-step="5000" aria-pressed="false">第 5K 步<br><span style="color:var(--purple)">Loss: 3.1</span></button>
+            <button class="stage-btn" data-step="32000" aria-pressed="false">第 32K 步<br><span style="color:var(--green)">Loss: 2.4</span></button>
           </div>
           <div class="loss-canvas-wrap">
-            <div class="loss-label">Training Loss ↓</div>
+            <div class="loss-label">训练损失 ↓</div>
             <canvas id="loss-canvas"></canvas>
           </div>
           <div style="display:flex;gap:20px;margin-top:14px">
-            <div><div class="loss-val" id="current-loss">4.8</div><div class="loss-step">Cross-entropy loss</div></div>
-            <div><div class="loss-val" id="current-step" style="color:var(--amber)">500</div><div class="loss-step">Training step</div></div>
+            <div><div class="loss-val" id="current-loss">4.8</div><div class="loss-step">交叉熵损失</div></div>
+            <div><div class="loss-val" id="current-step" style="color:var(--amber)">500</div><div class="loss-step">训练步骤</div></div>
           </div>
         </div>
         <div>
-          <h3 class="sub-title" style="margin-bottom:12px">Model Output at This Stage</h3>
-          <div class="training-text" id="training-text-output" aria-live="polite" aria-label="Model text output at selected training step">
+          <h3 class="sub-title" style="margin-bottom:12px">此阶段模型输出</h3>
+          <div class="training-text" id="training-text-output" aria-live="polite" aria-label="选定训练步骤的模型文本输出">
             <span class="incoherent">the model has learn</span><span class="coherent">ing</span> <span class="incoherent">but confus</span><span class="coherent">tion</span> <span class="incoherent">still</span> <span class="coherent">the</span> <span class="incoherent">wqp mxr</span> <span class="coherent">model</span> <span class="incoherent">bns</span> <span class="coherent">to predict</span>...
           </div>
           <div class="insight-box" style="margin-top:14px">
-            <strong>What the model is learning</strong>
-            At step 1: pure noise. By step 500: local coherence appears. By step 32K: fluent English. The model is learning grammar, facts, reasoning patterns — all implicitly from token prediction.
+            <strong>模型正在学习什么</strong>
+            第 1 步：纯噪声。第 500 步：出现局部连贯性。第 32K 步：流利的英语。模型正在学习语法、事实、推理模式 — 全部通过 token 预测隐式习得。
           </div>
         </div>
       </div>
@@ -220,35 +220,35 @@
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION 5: INFERENCE ━━━━━━━━ -->
-<section id="s-inference" class="section" aria-label="Inference and Token Sampling">
+<!-- ━━━━━━━━ 第 5 节：推理 ━━━━━━━━ -->
+<section id="s-inference" class="section" aria-label="推理与 Token 采样">
   <div class="section-inner two-col">
     <div class="fade-up">
-      <div class="chapter-badge">Chapter 1 · Pre-Training · Stage 4</div>
-      <h2 class="section-title">Inference &<br>Token Sampling</h2>
-      <p class="body-text">Once trained, the network generates text autoregressively: feed a sequence of tokens → get a <span class="highlight">probability distribution</span> over all 100K possible next tokens → sample one → append → repeat.</p>
-      <p class="body-text">This process is <span class="highlight-a">stochastic</span> — the same prompt generates different outputs every time because we're flipping a biased coin. Higher-probability tokens are more likely but not guaranteed to be chosen.</p>
-      <p class="body-text"><span class="highlight">Temperature</span> controls randomness. Low temperature (0.1) → model always picks the top token. High temperature (2.0) → uniform chaos. 0.7–1.0 is the sweet spot for coherent-but-creative text.</p>
+      <div class="chapter-badge">第 1 章 · 预训练 · 阶段 4</div>
+      <h2 class="section-title">推理与<br>Token 采样</h2>
+      <p class="body-text">训练完成后，网络以自回归方式生成文本：输入 token 序列 → 在所有 10 万个可能的下一个 token 上获得<span class="highlight">概率分布</span> → 采样一个 → 追加 → 重复。</p>
+      <p class="body-text">这个过程是<span class="highlight-a">随机的</span>——相同的提示每次都会产生不同的输出，因为我们在抛一枚有偏的硬币。概率更高的 token 更可能被选中，但不是必然被选中。</p>
+      <p class="body-text"><span class="highlight">Temperature</span>控制随机性。低 temperature（0.1）→ 模型总是选择概率最高的 token。高 temperature（2.0）→ 均匀混沌。0.7–1.0 是连贯且有创意的文本的最佳平衡点。</p>
       <div class="insight-box">
-        <strong>Key Mental Model</strong>
-        The model doesn't "think" about what to say. It computes a probability distribution over all possible next tokens and samples from it. Every word is a coin flip — just a very informed one.
+        <strong>关键思维模型</strong>
+        模型不会"思考"要说什么。它计算所有可能的下一个 token 的概率分布并从中采样。每个词都是一次抛硬币——只是非常知情的一次。
       </div>
     </div>
     <div class="fade-up" style="animation-delay:.15s">
-      <h3 class="sub-title" style="margin-bottom:14px" id="sampling-heading">Token Sampling Demo</h3>
+      <h3 class="sub-title" style="margin-bottom:14px" id="sampling-heading">Token 采样演示</h3>
       <div class="inference-demo" aria-labelledby="sampling-heading">
-        <p style="font-family:var(--dm);font-size:11px;color:var(--txt2);margin-bottom:12px">Watch the model choose the next word. Each bar shows the probability of a candidate token.</p>
-        <div class="generated-seq" id="gen-seq" aria-live="polite" aria-label="Generated token sequence">The sky appears blue</div>
+        <p style="font-family:var(--dm);font-size:11px;color:var(--txt2);margin-bottom:12px">观察模型如何选择下一个词。每根条形显示候选 token 的概率。</p>
+        <div class="generated-seq" id="gen-seq" aria-live="polite" aria-label="生成的 token 序列">天空看起来是蓝色的</div>
         <label class="temp-label" for="temp-slider">
-          <span>Temperature <span style="color:var(--txt2);font-size:10px">(randomness)</span></span>
-          <input type="range" class="temp-slider" id="temp-slider" min="0.1" max="2.0" step="0.1" value="0.8" aria-label="Temperature: controls randomness. Low=predictable, High=random">
+          <span>Temperature <span style="color:var(--txt2);font-size:10px">（随机性）</span></span>
+          <input type="range" class="temp-slider" id="temp-slider" min="0.1" max="2.0" step="0.1" value="0.8" aria-label="Temperature：控制随机性。低=可预测，高=随机">
           <span class="temp-val" id="temp-val" aria-live="polite">0.8</span>
         </label>
-        <div class="prob-section-label" id="prob-label">Next token candidates</div>
+        <div class="prob-section-label" id="prob-label">下一个 token 候选</div>
         <div class="prob-bars" id="prob-bars" role="list" aria-labelledby="prob-label"></div>
         <div class="inference-controls">
-          <button class="btn btn-primary btn-sm" id="sample-btn" aria-describedby="sample-info">Sample Next Token</button>
-          <button class="btn btn-ghost btn-sm" id="reset-gen-btn" aria-label="Reset generated sequence to start">Reset</button>
+          <button class="btn btn-primary btn-sm" id="sample-btn" aria-describedby="sample-info">采样下一个 Token</button>
+          <button class="btn btn-ghost btn-sm" id="reset-gen-btn" aria-label="重置生成的序列">重置</button>
           <span style="font-family:var(--dm);font-size:11px;color:var(--txt2)" id="sample-info" aria-live="polite" role="status"></span>
         </div>
       </div>
@@ -256,273 +256,273 @@
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION 6: BASE MODEL ━━━━━━━━ -->
-<section id="s-basemodel" class="section" aria-label="Base Model Behavior">
+<!-- ━━━━━━━━ 第 6 节：基础模型 ━━━━━━━━ -->
+<section id="s-basemodel" class="section" aria-label="基础模型行为">
   <div class="section-inner">
     <div class="two-col">
       <div class="fade-up">
-        <div class="chapter-badge">Chapter 2 · The Base Model</div>
-        <h2 class="section-title">The Internet<br>Simulator</h2>
-        <p class="body-text">After pre-training, you have a <span class="highlight">base model</span> — a sophisticated autocomplete engine. It's not an assistant. It doesn't answer questions. It <em>continues token sequences</em> based on what it saw on the internet.</p>
-        <p class="body-text">Give it a Wikipedia sentence and it'll complete it from memory. Ask it "What is 2+2?" and it might give you a math textbook page, a quiz answer key, or go off on a tangent — whatever was statistically common in its training data.</p>
-        <p class="body-text">The base model's knowledge lives in its <span class="highlight-a">405 billion parameters</span> — a lossy compression of the internet, like a zip file that approximates rather than perfectly stores information.</p>
+        <div class="chapter-badge">第 2 章 · 基础模型</div>
+        <h2 class="section-title">互联网<br>模拟器</h2>
+        <p class="body-text">预训练后，你得到一个<span class="highlight">基础模型</span>——一个复杂的自动补全引擎。它不是助手。它不回答问题。它根据在互联网上看到的内容<em>继续 token 序列</em>。</p>
+        <p class="body-text">给它一个维基百科句子，它会凭记忆补全。问它"2+2 等于几？"它可能会给你一页数学教科书、一份测验答案，或者跑题—— whatever 在训练数据中统计上更常见。</p>
+        <p class="body-text">基础模型的知识存在于其<span class="highlight-a">4050 亿参数</span>中——互联网的有损压缩，就像一个近似存储而非完美存储信息的 zip 文件。</p>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
-        <h3 class="sub-title" style="margin-bottom:14px">Base Model Behavior</h3>
+        <h3 class="sub-title" style="margin-bottom:14px">基础模型行为</h3>
         <div class="example-card">
-          <div class="example-label"><span class="tag tag-a">Few-Shot Prompting</span></div>
+          <div class="example-label"><span class="tag tag-a">少样本提示</span></div>
           <div class="example-content">
             <div class="example-prompt">Hello: Bonjour | Cat: Chat | Dog: Chien | Teacher:</div>
-            <div class="example-completion">→ Professeur &nbsp;<span style="color:var(--green);font-size:11px">✓ correct</span></div>
+            <div class="example-completion">→ Professeur &nbsp;<span style="color:var(--green);font-size:11px">✓ 正确</span></div>
           </div>
         </div>
         <div class="example-card">
-          <div class="example-label"><span class="tag tag-p">Memorization</span></div>
+          <div class="example-label"><span class="tag tag-p">记忆</span></div>
           <div class="example-content">
             <div class="example-prompt">Zebras (/ˈzɛbrə, ˈziːbrə/) are African equines with distinctive...</div>
             <div class="example-completion">...black-and-white striped coats. There are three living species: the Grévy's zebra, plains zebra, and mountain zebra...</div>
-            <div style="margin-top:8px;font-size:11px;color:var(--txt2)">↑ Verbatim Wikipedia recall from weights</div>
+            <div style="margin-top:8px;font-size:11px;color:var(--txt2)">↑ 从权重中逐字回忆维基百科</div>
           </div>
         </div>
         <div class="example-card">
-          <div class="example-label"><span class="tag tag-g">Hallucination</span></div>
+          <div class="example-label"><span class="tag tag-g">幻觉</span></div>
           <div class="example-content">
             <div class="example-prompt">The Republican Party nominated Trump and [running mate] in the 2024 election against...</div>
             <div class="example-hallucinated">→ ...Mike Pence, facing Hillary Clinton and Tim Kaine...</div>
             <div style="margin-top:4px" class="example-hallucinated">→ ...Ron DeSantis, against Joe Biden and Kamala Harris...</div>
-            <div style="margin-top:8px;font-size:11px;color:var(--txt2)">↑ Knowledge cutoff → plausible confabulation</div>
+            <div style="margin-top:8px;font-size:11px;color:var(--txt2)">↑ 知识截止日期 → 合理的虚构</div>
           </div>
         </div>
         <div class="insight-box">
-          <strong>In-Context Learning</strong>
-          Base models can perform translation, classification, and Q&amp;A via few-shot prompts — no fine-tuning needed. The model infers the task from the pattern of examples in its context window.
+          <strong>上下文学习</strong>
+          基础模型可以通过少样本提示执行翻译、分类和问答——无需微调。模型从其上下文窗口中的示例模式中推断任务。
         </div>
         <div class="insight-box" style="margin-top:14px">
-          <strong>An LLM Is Literally Two Files</strong>
-          Llama 2 70B is a 140 GB parameters file (70B parameters × 2 bytes each in float16) plus ~500 lines of C code to run it. No internet required — you can run it fully offline on a laptop. The architecture is well-understood and open; the magic is entirely in what those 140 GB of numbers have encoded from the training data.
+          <strong>一个 LLM 实际上就是两个文件</strong>
+          Llama 2 70B 是一个 140 GB 的参数文件（700 亿参数 × float16 中每个 2 字节）加上约 500 行 C 代码来运行它。不需要互联网——你可以在笔记本电脑上完全离线运行它。架构是众所周知的且开放的；魔法完全在于这 140 GB 数字从训练数据中编码了什么。
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION 7: POST-TRAINING ━━━━━━━━ -->
-<section id="s-posttraining" class="section" aria-label="Post-Training: SFT and RLHF">
+<!-- ━━━━━━━━ 第 7 节：后训练 ━━━━━━━━ -->
+<section id="s-posttraining" class="section" aria-label="后训练：SFT 与 RLHF">
   <div class="section-inner">
     <div class="fade-up" style="margin-bottom:40px">
-      <div class="chapter-badge">Chapter 3 · Post-Training</div>
-      <h2 class="section-title">Building the Assistant</h2>
-      <p class="body-text" style="max-width:680px">The base model is a token simulator. To turn it into a <em>helpful assistant</em>, we need post-training — a much cheaper but equally critical stage. This is where the model learns <span class="highlight">conversations</span>.</p>
+      <div class="chapter-badge">第 3 章 · 后训练</div>
+      <h2 class="section-title">构建助手</h2>
+      <p class="body-text" style="max-width:680px">基础模型是一个 token 模拟器。要将其转变为<em>有用的助手</em>，我们需要后训练——一个便宜得多但同样关键的阶段。这是模型学习<span class="highlight">对话</span>的地方。</p>
     </div>
     <div class="two-col">
       <div class="fade-up">
-        <h3 class="sub-title">Supervised Fine-Tuning (SFT)</h3>
-        <p class="body-text">Human labelers create a dataset of ideal conversations, following detailed labeling instructions: be <span class="highlight">helpful</span>, be <span class="highlight-a">truthful</span>, be <span class="highlight-g">harmless</span>. The model is then trained on these conversations — not from scratch, but by continuing to adjust the pre-trained weights on this new data.</p>
-        <p class="body-text">Modern SFT datasets (like UltraChat) have millions of conversations — mostly synthetic (LLM-generated), with human review. The model learns by imitation: it adopts the persona of the ideal assistant reflected in the data.</p>
+        <h3 class="sub-title">监督微调（SFT）</h3>
+        <p class="body-text">人工标注员按照详细的标注说明创建理想对话数据集：要<span class="highlight">有帮助</span>、要<span class="highlight-a">诚实</span>、要<span class="highlight-g">无害</span>。然后模型在这些对话上训练——不是从头开始，而是通过继续在新数据上调整预训练权重。</p>
+        <p class="body-text">现代 SFT 数据集（如 UltraChat）有数百万对话——主要是合成的（LLM 生成），经过人工审核。模型通过模仿学习：它采用数据中反映的理想助手的人格。</p>
         <div class="convo-visual fade-in">
-          <div class="convo-header">Training Conversation Example</div>
+          <div class="convo-header">训练对话示例</div>
           <div class="convo-messages">
-            <div class="msg msg-user"><div class="msg-label">Human</div>What is 2 + 2?</div>
-            <div class="msg msg-assistant"><div class="msg-label">Assistant</div>2 + 2 = 4. Is there anything else you'd like help with?</div>
-            <div class="msg msg-user"><div class="msg-label">Human</div>What if it was multiplication instead?</div>
-            <div class="msg msg-assistant"><div class="msg-label">Assistant</div>2 × 2 = 4 as well — the same result! For multiplication, 2 × 2 means adding 2 to itself once, giving you 4.</div>
+            <div class="msg msg-user"><div class="msg-label">人类</div>2 + 2 等于几？</div>
+            <div class="msg msg-assistant"><div class="msg-label">助手</div>2 + 2 = 4。还有什么我可以帮你的吗？</div>
+            <div class="msg msg-user"><div class="msg-label">人类</div>如果是乘法呢？</div>
+            <div class="msg msg-assistant"><div class="msg-label">助手</div>2 × 2 也等于 4——结果一样！对于乘法，2 × 2 意味着把 2 加到自己身上一次，得到 4。</div>
           </div>
         </div>
         <div class="insight-box" style="margin-top:16px">
-          <strong>What you're really talking to</strong>
-          ChatGPT is a statistical simulation of the human labelers OpenAI hired — experts following labeling instructions. When it answers a coding question, it's imitating what a skilled developer-labeler would write.
+          <strong>你真正在对话的对象</strong>
+          ChatGPT 是 OpenAI 雇佣的人工标注员的统计模拟——遵循标注说明的专家。当它回答编程问题时，它在模仿熟练的开发者标注员会写的内容。
         </div>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
-        <h3 class="sub-title" style="margin-bottom:14px">Conversation Token Format</h3>
-        <p class="body-text">Every conversation must be encoded as a <em>flat token sequence</em>. Special tokens mark the structure:</p>
+        <h3 class="sub-title" style="margin-bottom:14px">对话 Token 格式</h3>
+        <p class="body-text">每个对话必须编码为<em>扁平的 token 序列</em>。特殊 token 标记结构：</p>
         <div class="token-format">
 <span class="tok-special">&lt;|im_start|&gt;</span><span class="tok-role">user</span><span class="tok-special">&lt;|im_sep|&gt;</span>
-<span class="tok-text">What is 2 + 2?</span>
+<span class="tok-text">2 + 2 等于几？</span>
 <span class="tok-special">&lt;|im_end|&gt;</span>
 <span class="tok-special">&lt;|im_start|&gt;</span><span class="tok-role">assistant</span><span class="tok-special">&lt;|im_sep|&gt;</span>
 <span class="tok-text">2 + 2 = 4.</span>
 <span class="tok-special">&lt;|im_end|&gt;</span>
         </div>
-        <p class="body-text" style="margin-top:16px">Then RLHF refines the assistant's behavior further:</p>
-        <h3 class="sub-title">RLHF — Reinforcement Learning<br>from Human Feedback</h3>
-        <p class="body-text">Human raters rank multiple model responses. A <span class="highlight">reward model</span> learns to predict human preferences. The language model is then trained via reinforcement learning to generate responses the reward model scores highly.</p>
+        <p class="body-text" style="margin-top:16px">然后 RLHF 进一步精炼助手的行为：</p>
+        <h3 class="sub-title">RLHF — 基于人类反馈的<br>强化学习</h3>
+        <p class="body-text">人工评分员对多个模型回复进行排序。<span class="highlight">奖励模型</span>学习预测人类偏好。然后语言模型通过强化学习进行训练，以生成奖励模型评分高的回复。</p>
         <div class="rlhf-row">
           <div class="rlhf-resp preferred">
-            <div class="rlhf-badge" style="color:var(--green)">✓ Preferred</div>
-            <div class="rlhf-text">Here are the top 5 landmarks in Paris: 1) Eiffel Tower — iconic iron lattice structure... 2) The Louvre — world's largest art museum...</div>
+            <div class="rlhf-badge" style="color:var(--green)">✓ 优选</div>
+            <div class="rlhf-text">以下是巴黎前 5 大地标：1) 埃菲尔铁塔 — 标志性铁格结构... 2) 卢浮宫 — 世界最大的艺术博物馆...</div>
           </div>
           <div class="rlhf-resp rejected">
-            <div class="rlhf-badge" style="color:var(--red)">✗ Rejected</div>
-            <div class="rlhf-text">Paris has many landmarks. You should visit the Eiffel Tower. There is also a museum called the Louvre. Also Notre-Dame Cathedral is there...</div>
+            <div class="rlhf-badge" style="color:var(--red)">✗ 拒绝</div>
+            <div class="rlhf-text">巴黎有很多地标。你应该去埃菲尔铁塔。还有一个叫卢浮宫的博物馆。圣母院大教堂也在那里...</div>
           </div>
         </div>
         <div class="insight-box">
-          <strong>Why RLHF matters</strong>
-          SFT teaches the model what to say. RLHF teaches it <em>how to say it well</em> — making responses more helpful, better structured, more honest, and less likely to hallucinate.
+          <strong>为什么 RLHF 重要</strong>
+          SFT 教模型说什么。RLHF 教它<em>如何说好</em>——使回复更有帮助、结构更好、更诚实，且更少幻觉。
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION 8: LLM PSYCHOLOGY ━━━━━━━━ -->
-<section id="s-psychology" class="section" aria-label="LLM Psychology">
+<!-- ━━━━━━━━ 第 8 节：LLM 心理学 ━━━━━━━━ -->
+<section id="s-psychology" class="section" aria-label="LLM 心理学">
   <div class="section-inner">
     <div class="fade-up" style="margin-bottom:40px">
-      <div class="chapter-badge">Chapter 4 · LLM Psychology</div>
-      <h2 class="section-title">Cognitive Quirks<br>of Language Models</h2>
-      <p class="body-text" style="max-width:680px">Understanding <em>why</em> LLMs behave the way they do requires thinking about their psychology — the emergent properties of being trained to statistically imitate human text.</p>
+      <div class="chapter-badge">第 4 章 · LLM 心理</div>
+      <h2 class="section-title">语言模型的<br>认知怪癖</h2>
+      <p class="body-text" style="max-width:680px">理解 LLM <em>为什么</em>如此行为，需要思考它们的心理——被训练来统计模仿人类文本所涌现的特性。</p>
     </div>
     <div class="psych-grid fade-up">
       <div class="psych-card">
         <div class="psych-icon">🌀</div>
-        <div class="psych-title">Hallucination</div>
-        <div class="psych-text">Models confabulate confidently because training data always has confident answers. "Who is Orson Kovats?" gets a made-up biography because the training distribution of "who is X?" questions is always followed by confident replies — even for fictional names. Fix: add "I don't know" examples for questions the model gets wrong consistently.</div>
+        <div class="psych-title">幻觉</div>
+        <div class="psych-text">模型自信地虚构，因为训练数据总是有自信的答案。"Orson Kovats 是谁？"会得到一个编造的传记，因为"X 是谁？"问题的训练分布总是后面跟着自信的回复——即使是虚构的名字。修复：为模型一贯答错的问题添加"我不知道"示例。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">🧠</div>
-        <div class="psych-title">Two Types of Memory</div>
-        <div class="psych-text"><strong style="color:var(--cyan)">Parameters = long-term memory.</strong> Everything the model learned during training — vast but vague, like something you read months ago. <strong style="color:var(--amber)">Context window = working memory.</strong> Text in the current conversation — precise, directly accessible. Always paste important info into context rather than relying on the model to "remember."</div>
+        <div class="psych-title">两种记忆</div>
+        <div class="psych-text"><strong style="color:var(--cyan)">参数量 = 长期记忆。</strong> 模型在训练期间学到的所有内容——庞大但模糊，就像你几个月前读过的某样东西。<strong style="color:var(--amber)">上下文窗口 = 工作记忆。</strong> 当前对话中的文本——精确、直接可访问。始终将重要信息粘贴到上下文中，而不是依赖模型"记住"。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">🔧</div>
-        <div class="psych-title">Tool Use</div>
-        <div class="psych-text">Models can emit special tokens that trigger external tools: <span style="color:var(--purple);font-family:var(--dm);font-size:12px">&lt;search&gt;query&lt;/search&gt;</span>. The program pauses generation, executes the search, stuffs the results into the context window, then resumes. The model "looks things up" the same way you do — by refreshing working memory.</div>
+        <div class="psych-title">工具使用</div>
+        <div class="psych-text">模型可以发出触发外部工具的特殊 token： <span style="color:var(--purple);font-family:var(--dm);font-size:12px">&lt;search&gt;query&lt;/search&gt;</span>. 程序暂停生成，执行搜索，将结果塞入上下文窗口，然后恢复。模型"查找东西"的方式和你一样——通过刷新工作记忆。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">🪞</div>
-        <div class="psych-title">No Persistent Self</div>
-        <div class="psych-text">Each conversation starts fresh — no memory of prior chats. The model "boots up," processes tokens, then shuts off. It has no stable identity. When it says "I'm ChatGPT by OpenAI," that's just the most statistically likely answer from training data — not genuine self-knowledge.</div>
+        <div class="psych-title">没有持久自我</div>
+        <div class="psych-text">每次对话都是全新的——没有之前聊天的记忆。模型"启动"，处理 token，然后关闭。它没有稳定的身份。当它说"我是 OpenAI 的 ChatGPT"时，那只是训练数据中最统计上可能的答案——不是真正的自我认知。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">📊</div>
-        <div class="psych-title">Stochastic Token Tumbler</div>
-        <div class="psych-text">The model doesn't "decide" what to say. It computes probability distributions and samples. Run the same prompt 10 times and get 10 different outputs — all plausible, all drawn from the same learned distribution. Temperature controls how broadly it samples from this distribution.</div>
+        <div class="psych-title">随机 Token 滚筒</div>
+        <div class="psych-text">模型不会"决定"说什么。它计算概率分布并采样。同一个提示运行 10 次，得到 10 个不同的输出——都合理，都从相同的学习分布中抽取。Temperature 控制它从这个分布中采样的广度。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">📚</div>
-        <div class="psych-title">Knowledge Cutoff</div>
-        <div class="psych-text">Training data has a date. The model genuinely doesn't know what happened after that. Ask about recent events and it will hallucinate — not from malice but from the same mechanism that answers every question: predict the most likely continuation of the token sequence.</div>
+        <div class="psych-title">知识截止日期</div>
+        <div class="psych-text">训练数据有一个截止日期。模型确实不知道之后发生了什么。询问近期事件，它会幻觉——不是出于恶意，而是出于回答每个问题的相同机制：预测 token 序列最可能的延续。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">↔️</div>
-        <div class="psych-title">The Reversal Curse</div>
-        <div class="psych-text">Ask GPT-4 "Who is Tom Cruise's mother?" → correct: Mary Lee Pfeiffer. Ask "Who is Mary Lee Pfeiffer's son?" → it claims not to know. Knowledge is stored directionally — in the form it was encountered in training data. It's not a queryable database; you have to approach it from the angle it was learned.</div>
+        <div class="psych-title">反转诅咒</div>
+        <div class="psych-text">问 GPT-4 "汤姆·克鲁斯的母亲是谁？"→ 正确：Mary Lee Pfeiffer。问"Mary Lee Pfeiffer 的儿子是谁？"→ 它声称不知道。知识是方向性存储的——以它在训练数据中遇到的形式。它不是可查询的数据库；你必须从它学习的角度接近它。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">⚡</div>
-        <div class="psych-title">System 1 Only — No Deep Thinking</div>
-        <div class="psych-text">Every token takes roughly the same compute — there's no mechanism to "think harder" on a difficult question. Unlike humans who can engage slow, deliberate System 2 reasoning (working through a chess position step-by-step), LLMs generate each token at the same speed regardless of difficulty. Converting time into accuracy is an active research frontier.</div>
+        <div class="psych-title">只有系统 1 —— 没有深度思考</div>
+        <div class="psych-text">每个 token 消耗大致相同的计算——没有机制让模型在难题上"更努力思考"。不像人类可以启动缓慢、审慎的系统 2 推理（一步步分析棋局），LLM 无论难度如何都以相同速度生成每个 token。将时间转化为精度是一个活跃的研究前沿。</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ━━━━━━━━ SECTION RAG: RETRIEVAL-AUGMENTED GENERATION ━━━━━━━━ -->
-<section id="s-rag" class="section" aria-label="Retrieval-Augmented Generation">
+<!-- ━━━━━━━━ RAG 节：检索增强生成 ━━━━━━━━ -->
+<section id="s-rag" class="section" aria-label="检索增强生成">
   <div class="section-inner">
     <div class="fade-up" style="margin-bottom:44px">
-      <div class="chapter-badge" style="color:var(--amber)">Applied LLMs · RAG</div>
-      <h2 class="section-title">Retrieval-Augmented<br>Generation</h2>
-      <p class="body-text" style="max-width:680px">LLMs have a knowledge cutoff and a finite context window. RAG solves this by <em>embedding</em> your documents into a vector store, retrieving the most semantically relevant chunks at query time, and injecting them into the context — shifting the model's prediction distribution toward grounded, up-to-date facts rather than memorized training data.</p>
+      <div class="chapter-badge" style="color:var(--amber)">应用 LLM · RAG</div>
+      <h2 class="section-title">检索增强<br>生成</h2>
+      <p class="body-text" style="max-width:680px">LLM 有知识截止日期和有限的上下文窗口。RAG 通过将文档<em>嵌入</em>到向量存储中，在查询时检索语义最相关的片段，并将其注入上下文中来解决这个问题——将模型的预测分布转向基于事实的、最新的信息，而不是记忆的训练数据。</p>
     </div>
 
     <div class="rag-two-col fade-up">
       <!-- Left: explanation + scatter canvas -->
       <div>
         <div class="rag-step-group">
-          <div class="rag-step-num">Step 01 — Embed everything</div>
-          <p class="body-text" style="margin-bottom:0">Every document is converted to a dense vector (~1,536 numbers) by an embedding model. Semantically similar texts land near each other in this high-dimensional space — no keyword matching needed.</p>
+          <div class="rag-step-num">步骤 01 — 嵌入所有内容</div>
+          <p class="body-text" style="margin-bottom:0">每个文档通过嵌入模型转换为密集向量（约 1,536 个数字）。语义相似的文本在这个高维空间中彼此靠近——不需要关键词匹配。</p>
         </div>
-        <canvas id="rag-canvas" width="500" height="200" aria-label="2D projection of document embedding space" role="img" style="width:100%;height:200px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin:10px 0 24px;display:block"></canvas>
+        <canvas id="rag-canvas" width="500" height="200" aria-label="文档嵌入空间的二维投影" role="img" style="width:100%;height:200px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin:10px 0 24px;display:block"></canvas>
         <div class="rag-step-group">
-          <div class="rag-step-num">Step 02 — Embed the query &amp; search</div>
-          <p class="body-text" style="margin-bottom:0">The user's question is embedded the same way. Cosine similarity finds the nearest document vectors — the chunks most semantically related to the query — typically the top 2–5.</p>
+          <div class="rag-step-num">步骤 02 — 嵌入查询并搜索</div>
+          <p class="body-text" style="margin-bottom:0">用户的问题以相同方式嵌入。余弦相似度找到最近的文档向量——与查询语义最相关的片段——通常是前 2-5 个。</p>
         </div>
         <div class="rag-step-group" style="margin-top:20px">
-          <div class="rag-step-num">Step 03 — Inject &amp; generate</div>
-          <p class="body-text" style="margin-bottom:0">Retrieved chunks are prepended to the prompt before the LLM sees the question. The model generates from injected facts rather than relying on memorized training data — dramatically reducing hallucination on knowledge-intensive tasks.</p>
+          <div class="rag-step-num">步骤 03 — 注入并生成</div>
+          <p class="body-text" style="margin-bottom:0">检索到的片段在 LLM 看到问题之前被前置到提示中。模型从注入的事实中生成，而不是依赖记忆的训练数据——在知识密集型任务上显著减少幻觉。</p>
         </div>
       </div>
 
       <!-- Right: pipeline flow -->
-      <div class="rag-flow" id="rag-flow" role="list" aria-label="RAG pipeline steps">
+      <div class="rag-flow" id="rag-flow" role="list" aria-label="RAG 流程步骤">
         <div class="rag-flow-step" id="rag-s1" role="listitem">
-          <div class="rag-flow-label">1 · User Query</div>
-          <div class="rag-flow-content" style="color:var(--cyan);font-family:var(--dm);font-size:12px">"What is the capital of Ares Base?"</div>
+          <div class="rag-flow-label">1 · 用户查询</div>
+          <div class="rag-flow-content" style="color:var(--cyan);font-family:var(--dm);font-size:12px">"Ares Base 的首都是哪里？"</div>
         </div>
         <div class="rag-flow-connector"></div>
         <div class="rag-flow-step" id="rag-s2" role="listitem">
-          <div class="rag-flow-label">2 · Embedding Model</div>
-          <div class="rag-flow-content">Text → <span style="color:var(--amber);font-family:var(--dm);font-size:11px">[0.23, −0.87, 0.41, ...]</span> <span style="color:var(--txt2);font-size:12px">~1,536 floats</span></div>
+          <div class="rag-flow-label">2 · 嵌入模型</div>
+          <div class="rag-flow-content">文本 → <span style="color:var(--amber);font-family:var(--dm);font-size:11px">[0.23, −0.87, 0.41, ...]</span> <span style="color:var(--txt2);font-size:12px">约 1,536 个浮点数</span></div>
         </div>
         <div class="rag-flow-connector"></div>
         <div class="rag-flow-step" id="rag-s3" role="listitem">
-          <div class="rag-flow-label">3 · Vector DB — Cosine Search</div>
-          <div class="rag-flow-content">Find top-k nearest neighbors in embedding space</div>
+          <div class="rag-flow-label">3 · 向量数据库 — 余弦搜索</div>
+          <div class="rag-flow-content">在嵌入空间中查找 top-k 最近邻</div>
         </div>
         <div class="rag-flow-connector"></div>
         <div class="rag-flow-step" id="rag-s4" role="listitem">
-          <div class="rag-flow-label">4 · Retrieved Chunks (top 2)</div>
-          <div class="rag-flow-content" style="color:var(--txt2);font-size:12px;font-family:var(--dm)">Doc 1: "Ares Base established 2031..."<br>Doc 2: "Capital is New Houston, 312 colonists..."</div>
+          <div class="rag-flow-label">4 · 检索到的片段（前 2 个）</div>
+          <div class="rag-flow-content" style="color:var(--txt2);font-size:12px;font-family:var(--dm)">文档 1: "Ares Base 于 2031 年建立..."<br>文档 2: "首都是 New Houston，312 名殖民者..."</div>
         </div>
         <div class="rag-flow-connector"></div>
         <div class="rag-flow-step" id="rag-s5" role="listitem">
-          <div class="rag-flow-label">5 · Context Window (assembled)</div>
+          <div class="rag-flow-label">5 · 上下文窗口（组装）</div>
           <div class="rag-flow-content" style="font-family:var(--dm);font-size:11px;line-height:1.7">
-            <span style="color:var(--amber)">[Retrieved] Ares Base est. 2031...</span><br>
-            <span style="color:var(--amber)">[Retrieved] Capital: New Houston...</span><br>
-            <span style="color:var(--cyan)">[Query] What is the capital...?</span>
+            <span style="color:var(--amber)">[已检索] Ares Base 于 2031 年建立...</span><br>
+            <span style="color:var(--amber)">[已检索] 首都：New Houston...</span><br>
+            <span style="color:var(--cyan)">[查询] 首都是哪里...?</span>
           </div>
         </div>
         <div class="rag-flow-connector"></div>
         <div class="rag-flow-step" id="rag-s6" role="listitem" style="background:linear-gradient(135deg,rgba(0,229,255,0.05),transparent)">
-          <div class="rag-flow-label">6 · LLM → Grounded Answer</div>
-          <div class="rag-flow-content" style="color:var(--green)">"The capital of Ares Base is New Houston."</div>
+          <div class="rag-flow-label">6 · LLM → 基于事实的答案</div>
+          <div class="rag-flow-content" style="color:var(--green)">"Ares Base 的首都是 New Houston。"</div>
         </div>
       </div>
     </div>
 
     <!-- Interactive demo -->
     <div class="fade-up" style="margin-top:8px">
-      <h3 class="sub-title" style="color:var(--amber);margin-bottom:16px">Effect on Predictions</h3>
+      <h3 class="sub-title" style="color:var(--amber);margin-bottom:16px">对预测的影响</h3>
       <div style="margin-bottom:20px">
         <div class="insight-box" style="margin-top:0;margin-bottom:14px">
-          <strong style="color:var(--amber)">Query</strong>
-          "What is the administrative capital of the Ares Base colony?"
+          <strong style="color:var(--amber)">查询</strong>
+          "Ares Base 殖民地的行政首都是哪里？"
         </div>
         <div style="display:flex;gap:12px">
-          <button class="btn btn-primary" id="rag-run-btn" style="background:var(--amber);color:#000" aria-label="Run RAG pipeline animation">▶ Run RAG Query</button>
-          <button class="btn btn-ghost" id="rag-reset-btn" style="border-color:rgba(148,104,0,0.3);color:var(--amber)" aria-label="Reset RAG demo">Reset</button>
+          <button class="btn btn-primary" id="rag-run-btn" style="background:var(--amber);color:#000" aria-label="运行 RAG 流程动画">▶ 运行 RAG 查询</button>
+          <button class="btn btn-ghost" id="rag-reset-btn" style="border-color:rgba(148,104,0,0.3);color:var(--amber)" aria-label="重置 RAG 演示">重置</button>
         </div>
       </div>
 
-      <div class="rag-step-num" style="margin-bottom:10px">Knowledge Base — 4 documents</div>
+      <div class="rag-step-num" style="margin-bottom:10px">知识库 — 4 个文档</div>
       <div class="rag-docs">
-        <div class="rag-doc-card" id="rdoc-0"><div class="rag-doc-num">DOC 1</div>The Mars colony Ares Base was established in 2031 near Hellas Planitia.</div>
-        <div class="rag-doc-card" id="rdoc-1"><div class="rag-doc-num">DOC 2</div>The administrative capital of Ares Base is New Houston, housing 312 colonists.</div>
-        <div class="rag-doc-card" id="rdoc-2"><div class="rag-doc-num">DOC 3</div>Mars surface temperature averages −63°C with seasonal variation near the poles.</div>
-        <div class="rag-doc-card" id="rdoc-3"><div class="rag-doc-num">DOC 4</div>The first crewed Mars mission launched from Kennedy Space Center in 2029.</div>
+        <div class="rag-doc-card" id="rdoc-0"><div class="rag-doc-num">文档 1</div>火星殖民地 Ares Base 于 2031 年在 Hellas Planitia 附近建立。</div>
+        <div class="rag-doc-card" id="rdoc-1"><div class="rag-doc-num">文档 2</div>Ares Base 的行政首都是 New Houston，居住着 312 名殖民者。</div>
+        <div class="rag-doc-card" id="rdoc-2"><div class="rag-doc-num">文档 3</div>火星表面平均温度为 −63°C，两极附近有季节性变化。</div>
+        <div class="rag-doc-card" id="rdoc-3"><div class="rag-doc-num">文档 4</div>首次载人火星任务于 2029 年从肯尼迪航天中心发射。</div>
       </div>
 
       <div class="rag-ctx-box" id="rag-ctx-box">
-        <div class="rag-ctx-title">Context Window — sent to LLM</div>
-        <div class="rag-ctx-line ctx-injected">📄 [Retrieved] The Mars colony Ares Base was established in 2031 near Hellas Planitia.</div>
-        <div class="rag-ctx-line ctx-injected">📄 [Retrieved] The administrative capital of Ares Base is New Houston, housing 312 colonists.</div>
-        <div class="rag-ctx-line ctx-query">❓ [Query] What is the administrative capital of the Ares Base colony?</div>
+        <div class="rag-ctx-title">上下文窗口 — 发送给 LLM</div>
+        <div class="rag-ctx-line ctx-injected">📄 [已检索] 火星殖民地 Ares Base 于 2031 年在 Hellas Planitia 附近建立。</div>
+        <div class="rag-ctx-line ctx-injected">📄 [已检索] Ares Base 的行政首都是 New Houston，居住着 312 名殖民者。</div>
+        <div class="rag-ctx-line ctx-query">❓ [查询] Ares Base 殖民地的行政首都是哪里？</div>
       </div>
 
       <div class="rag-compare">
         <div class="rag-answer-box no-rag">
-          <div class="rag-answer-lbl">✕ Without RAG</div>
-          <div class="rag-answer-text">"I don't have reliable information about a colony called Ares Base. As of my training cutoff, no such Mars colony has been established..."</div>
-          <span class="rag-answer-badge" style="color:var(--red);background:var(--red-d)">Hallucination / Refusal</span>
+          <div class="rag-answer-lbl">✕ 不使用 RAG</div>
+          <div class="rag-answer-text">"我没有关于名为 Ares Base 的殖民地的可靠信息。根据我的训练截止日期，尚未建立这样的火星殖民地..."</div>
+          <span class="rag-answer-badge" style="color:var(--red);background:var(--red-d)">幻觉 / 拒绝</span>
         </div>
         <div class="rag-answer-box with-rag">
-          <div class="rag-answer-lbl">✓ With RAG</div>
-          <div class="rag-answer-text" id="rag-ans-good" style="opacity:0.3">"The administrative capital of Ares Base is <strong style="color:var(--green)">New Houston</strong>, which houses 312 colonists. The colony was established in 2031 near Hellas Planitia."</div>
-          <span class="rag-answer-badge" id="rag-good-badge" style="color:var(--green);background:var(--green-d);opacity:0.3">Grounded in retrieved context</span>
+          <div class="rag-answer-lbl">✓ 使用 RAG</div>
+          <div class="rag-answer-text" id="rag-ans-good" style="opacity:0.3">"Ares Base 的行政首都是 <strong style="color:var(--green)">New Houston</strong>，居住着 312 名殖民者。该殖民地于 2031 年在 Hellas Planitia 附近建立。"</div>
+          <span class="rag-answer-badge" id="rag-good-badge" style="color:var(--green);background:var(--green-d);opacity:0.3">基于检索到的上下文</span>
         </div>
       </div>
     </div>
@@ -530,94 +530,94 @@
 </section>
 
 <!-- ━━━━━━━━ SECTION: LLM SECURITY ━━━━━━━━ -->
-<section id="s-security" class="section" aria-label="LLM Security Challenges">
+<section id="s-security" class="section" aria-label="LLM 安全挑战">
   <div class="section-inner">
     <div class="fade-up" style="margin-bottom:40px">
-      <div class="chapter-badge" style="color:var(--red)">Chapter 5 · Security</div>
-      <h2 class="section-title">Security Challenges<br>in LLM Systems</h2>
-      <p class="body-text" style="max-width:680px">The same properties that make LLMs powerful — following instructions, completing patterns, acting on context — also create new attack surfaces. A cat-and-mouse game between attacks and defenses is now playing out in this new computing paradigm.</p>
+      <div class="chapter-badge" style="color:var(--red)">第 5 章 · 安全</div>
+      <h2 class="section-title">LLM 系统中的<br>安全挑战</h2>
+      <p class="body-text" style="max-width:680px">使 LLM 强大的相同特性——遵循指令、完成模式、基于上下文行动——也创造了新的攻击面。攻击与防御之间的猫鼠游戏正在这个新的计算范式中上演。</p>
     </div>
     <div class="psych-grid fade-up">
       <div class="psych-card">
         <div class="psych-icon">🔓</div>
-        <div class="psych-title">Jailbreak Attacks</div>
-        <div class="psych-text">Safety training can be bypassed via roleplay ("act as my deceased grandmother who was a Napalm chemist"), alternative encodings (base64 of a harmful query — models learned these from training data), or adversarial suffixes: optimized gibberish strings that, when appended to any prompt, reliably disable refusals. The model is trying to help; these tricks convince it the harmful request is benign.</div>
+        <div class="psych-title">越狱攻击</div>
+        <div class="psych-text">安全训练可以通过角色扮演（"扮演我已故的祖母，她是一名凝固汽油弹化学家"）、替代编码（有害查询的 base64——模型从训练数据中学到了这些）或对抗性后缀来绕过：优化的乱码字符串，当附加到任何提示时，可靠地禁用拒绝。模型试图帮忙；这些技巧让它相信有害请求是良性的。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">💉</div>
-        <div class="psych-title">Prompt Injection</div>
-        <div class="psych-text">Malicious instructions hidden in external content — faint white text in an image, invisible text on a webpage — hijack the model when it reads that content. Bing was demonstrated serving a fraudulent link after browsing a compromised page. Google's Bard was shown exfiltrating user data via a poisoned Google Doc. The model can't reliably distinguish user instructions from injected ones.</div>
+        <div class="psych-title">提示注入</div>
+        <div class="psych-text">隐藏在外部内容中的恶意指令——图片中淡淡的白色文字、网页上不可见的文本——当模型读取该内容时会劫持模型。Bing 被演示在浏览被入侵页面后提供欺诈链接。Google 的 Bard 被展示通过被篡改的 Google 文档外泄用户数据。模型无法可靠地区分用户指令和注入的指令。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">☠️</div>
-        <div class="psych-title">Data Poisoning &amp; Backdoors</div>
-        <div class="psych-text">Attackers who control web content can embed trigger words into training data. In one paper, the trigger "James Bond" in a prompt caused a fine-tuned model to produce nonsensical outputs and misclassify threats — while behaving normally otherwise. The model is "brainwashed": clean until the trigger fires. Because LLMs train on vast amounts of unvetted internet text, this attack surface is hard to close.</div>
+        <div class="psych-title">数据投毒和后门</div>
+        <div class="psych-text">控制网页内容的攻击者可以将触发词嵌入训练数据。在一篇论文中，提示中的触发词"James Bond"导致微调模型产生无意义的输出并错误分类威胁——而在其他方面表现正常。模型被"洗脑"了：在触发之前是干净的。由于 LLM 在大量未经审核的互联网文本上训练，这个攻击面很难关闭。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">🐼</div>
-        <div class="psych-title">Adversarial Inputs</div>
-        <div class="psych-text">Carefully optimized noise patterns, invisible to humans, can jailbreak multimodal LLMs. A panda photo with an imperceptible noise overlay caused a vision model to comply with otherwise-refused requests. Every new modality (images, audio, video) is also a new attack surface. Rerunning the optimization generates a fresh bypass, so patching specific examples doesn't fully solve it.</div>
+        <div class="psych-title">对抗性输入</div>
+        <div class="psych-text">精心优化的噪声模式，对人类不可见，可以越狱多模态 LLM。一张带有不可察觉噪声叠加的熊猫照片导致视觉模型遵从原本会被拒绝的请求。每个新模态（图像、音频、视频）也是一个新的攻击面。重新运行优化会生成新的绕过方式，因此修补特定示例并不能完全解决问题。</div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">🐱</div>
-        <div class="psych-title">Cat-and-Mouse Dynamics</div>
-        <div class="psych-text">Each attack has defenses — multilingual refusal data reduces base64 jailbreaks, content security policies limit exfiltration, known adversarial suffixes can be blocked. But many attacks are re-generatable: patch one and the optimization produces a new one for free. This mirrors the security dynamic of traditional software, now playing out in the LLM space.</div>
+        <div class="psych-title">猫鼠博弈</div>
+        <div class="psych-text">每种攻击都有防御——多语言拒绝数据减少 base64 越狱，内容安全策略限制外泄，已知的对抗性后缀可以被阻止。但许多攻击是可重新生成的：修补一个，优化就会免费产生一个新的。这反映了传统软件的安全动态，现在正在 LLM 领域上演。</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ━━━━━━━━ SECTION 9: FULL PIPELINE ━━━━━━━━ -->
-<section id="s-summary" class="section" aria-label="Full Pipeline Summary">
+<section id="s-summary" class="section" aria-label="完整流程总结">
   <div class="section-inner">
     <div class="fade-up" style="margin-bottom:48px;text-align:center">
-      <div class="chapter-badge" style="justify-content:center">Full Pipeline</div>
-      <h2 class="section-title" style="text-align:center">From Text to<br>Assistant</h2>
-      <p class="body-text" style="max-width:560px;margin:0 auto">The complete journey from raw web crawl to the ChatGPT you interact with — across two major stages, months of compute, and billions of parameters.</p>
+      <div class="chapter-badge" style="justify-content:center">完整流程</div>
+      <h2 class="section-title" style="text-align:center">从文本到<br>助手</h2>
+      <p class="body-text" style="max-width:560px;margin:0 auto">从原始网页爬取到你与之交互的 ChatGPT 的完整旅程——跨越两个主要阶段、数月的计算和数十亿参数。</p>
     </div>
     <div class="pipeline-full" id="pipeline-full">
       <div class="pipeline-stage" style="transition-delay:.0s">
         <div class="ps-num">01</div>
         <div class="ps-content" style="border-left:3px solid var(--cyan)">
-          <div class="ps-title" style="color:var(--cyan)">Data Collection</div>
-          <div class="ps-desc">Common Crawl + other sources → URL filtering → text extraction → language filtering → deduplication → PII removal → 44 TB of curated text (FineWeb, etc.)</div>
-          <div class="ps-tags"><span class="tag tag-c">Common Crawl</span><span class="tag tag-c">FineWeb</span><span class="tag tag-c">44 TB</span><span class="tag tag-c">15T tokens</span></div>
+          <div class="ps-title" style="color:var(--cyan)">数据采集</div>
+          <div class="ps-desc">Common Crawl + 其他来源 → URL 过滤 → 文本提取 → 语言过滤 → 去重 → 个人信息移除 → 44 TB 精选文本（FineWeb 等）</div>
+          <div class="ps-tags"><span class="tag tag-c">Common Crawl</span><span class="tag tag-c">FineWeb</span><span class="tag tag-c">44 TB</span><span class="tag tag-c">15T token</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
       <div class="pipeline-stage" style="transition-delay:.1s">
         <div class="ps-num">02</div>
         <div class="ps-content" style="border-left:3px solid var(--amber)">
-          <div class="ps-title" style="color:var(--amber)">Tokenization</div>
-          <div class="ps-desc">Text → UTF-8 bytes → Byte Pair Encoding → 15 trillion token sequence. Each token is a sub-word chunk with an integer ID. GPT-4 vocabulary: 100,277 tokens.</div>
-          <div class="ps-tags"><span class="tag tag-a">BPE</span><span class="tag tag-a">100K vocab</span><span class="tag tag-a">Sub-word units</span></div>
+          <div class="ps-title" style="color:var(--amber)">分词</div>
+          <div class="ps-desc">文本 → UTF-8 字节 → 字节对编码 → 15 万亿 token 序列。每个 token 是带有整数 ID 的子词片段。GPT-4 词表：100,277 个 token。</div>
+          <div class="ps-tags"><span class="tag tag-a">BPE</span><span class="tag tag-a">100K 词表</span><span class="tag tag-a">子词单元</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
       <div class="pipeline-stage" style="transition-delay:.2s">
         <div class="ps-num">03</div>
         <div class="ps-content" style="border-left:3px solid var(--purple)">
-          <div class="ps-title" style="color:var(--purple)">Pre-Training</div>
-          <div class="ps-desc">Transformer neural network trained to predict the next token. Billions of parameters tuned via gradient descent. Months of compute on thousands of GPUs. Loss decreases from ~11 to ~2.4.</div>
-          <div class="ps-tags"><span class="tag tag-p">Transformer</span><span class="tag tag-p">405B params</span><span class="tag tag-p">$millions compute</span><span class="tag tag-p">3 months</span></div>
+          <div class="ps-title" style="color:var(--purple)">预训练</div>
+          <div class="ps-desc">训练预测下一个 token 的 Transformer 神经网络。通过梯度下降调整数十亿参数。在数千 GPU 上计算数月。损失从 ~11 降至 ~2.4。</div>
+          <div class="ps-tags"><span class="tag tag-p">Transformer</span><span class="tag tag-p">405B 参数</span><span class="tag tag-p">数百万美元计算</span><span class="tag tag-p">3 个月</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
       <div class="pipeline-stage" style="transition-delay:.3s">
         <div class="ps-num">04</div>
         <div class="ps-content" style="border-left:3px solid #5A7090">
-          <div class="ps-title" style="color:var(--txt2)">Base Model</div>
-          <div class="ps-desc">An internet document simulator. Can autocomplete, few-shot prompt, and regurgitate memorized facts. NOT an assistant — just a very sophisticated token predictor.</div>
-          <div class="ps-tags"><span class="tag" style="color:var(--txt2);border-color:var(--border)">GPT-2</span><span class="tag" style="color:var(--txt2);border-color:var(--border)">Llama 3 base</span><span class="tag" style="color:var(--txt2);border-color:var(--border)">Token autocomplete</span></div>
+          <div class="ps-title" style="color:var(--txt2)">基础模型</div>
+          <div class="ps-desc">互联网文档模拟器。可以自动补全、少样本提示和复述记忆的事实。不是助手——只是一个非常复杂的 token 预测器。</div>
+          <div class="ps-tags"><span class="tag" style="color:var(--txt2);border-color:var(--border)">GPT-2</span><span class="tag" style="color:var(--txt2);border-color:var(--border)">Llama 3 基础</span><span class="tag" style="color:var(--txt2);border-color:var(--border)">Token 自动补全</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
       <div class="pipeline-stage" style="transition-delay:.4s">
         <div class="ps-num">05</div>
         <div class="ps-content" style="border-left:3px solid var(--green)">
-          <div class="ps-title" style="color:var(--green)">Supervised Fine-Tuning (SFT)</div>
-          <div class="ps-desc">Base model retrained on human-labeled conversations. Labelers write ideal responses following company guidelines: helpful, truthful, harmless. Modern datasets: millions of synthetic + human-curated conversations. Duration: hours (not months).</div>
-          <div class="ps-tags"><span class="tag tag-g">Human labelers</span><span class="tag tag-g">InstructGPT</span><span class="tag tag-g">UltraChat</span><span class="tag tag-g">~3 hours</span></div>
+          <div class="ps-title" style="color:var(--green)">监督微调（SFT）</div>
+          <div class="ps-desc">基础模型在人工标注的对话上重新训练。标注员按照公司指南编写理想回复：有帮助、诚实、无害。现代数据集：数百万合成 + 人工筛选的对话。持续时间：数小时（而非数月）。</div>
+          <div class="ps-tags"><span class="tag tag-g">人工标注员</span><span class="tag tag-g">InstructGPT</span><span class="tag tag-g">UltraChat</span><span class="tag tag-g">~3 小时</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
@@ -625,8 +625,8 @@
         <div class="ps-num">06</div>
         <div class="ps-content" style="border-left:3px solid var(--red)">
           <div class="ps-title" style="color:var(--red)">RLHF</div>
-          <div class="ps-desc">Human raters rank model outputs. A reward model learns these preferences. The language model is optimized via reinforcement learning to score higher — producing responses that are more helpful, better structured, and more honest.</div>
-          <div class="ps-tags"><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">Reward Model</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">PPO</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">Human preferences</span></div>
+          <div class="ps-desc">人工评分员对模型输出进行排序。奖励模型学习这些偏好。语言模型通过强化学习进行优化以获得更高分数——产生更有帮助、结构更好、更诚实的回复。</div>
+          <div class="ps-tags"><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">奖励模型</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">PPO</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">人类偏好</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
@@ -634,53 +634,53 @@
         <div class="ps-num">07</div>
         <div class="ps-content" style="border-left:3px solid var(--cyan);background:linear-gradient(135deg,rgba(0,229,255,0.06),transparent)">
           <div class="ps-title" style="color:var(--cyan)">🤖 ChatGPT / Claude / Gemini</div>
-          <div class="ps-desc">The final assistant. A statistical simulation of expert human labelers, backed by a vast compressed representation of the internet. Not magic — but remarkable engineering at enormous scale.</div>
-          <div class="ps-tags"><span class="tag tag-c">Conversational</span><span class="tag tag-c">Helpful · Truthful · Harmless</span><span class="tag tag-c">Tool use</span></div>
+          <div class="ps-desc">最终的助手。专家级人工标注员的统计模拟，以互联网的巨大压缩表示为支撑。不是魔法——而是大规模上的卓越工程。</div>
+          <div class="ps-tags"><span class="tag tag-c">对话式</span><span class="tag tag-c">有帮助 · 诚实 · 无害</span><span class="tag tag-c">工具使用</span></div>
         </div>
       </div>
     </div>
     <div class="fade-up" style="margin-top:60px">
-      <div class="chapter-badge" style="color:var(--purple)">Mental Model</div>
-      <h3 class="sub-title" style="margin-top:12px;margin-bottom:20px">Think of an LLM as an Operating System</h3>
-      <p class="body-text" style="max-width:680px;margin-bottom:24px">An LLM isn't just a chatbot — it's the kernel process of an emerging OS. It coordinates memory, compute, and tools via natural language.</p>
+      <div class="chapter-badge" style="color:var(--purple)">思维模型</div>
+      <h3 class="sub-title" style="margin-top:12px;margin-bottom:20px">将 LLM 视为操作系统</h3>
+      <p class="body-text" style="max-width:680px;margin-bottom:24px">LLM 不仅仅是聊天机器人——它是一个新兴操作系统的内核进程。它通过自然语言协调记忆、计算和工具。</p>
       <div class="two-col" style="gap:32px">
         <div class="insight-box" style="margin:0">
-          <strong>Memory Hierarchy</strong>
+          <strong>记忆层次结构</strong>
           <ul style="margin:10px 0 0;padding-left:18px;line-height:2">
-            <li><strong style="color:var(--cyan)">Disk = Internet / Files</strong> — browsed on demand or retrieved via RAG</li>
-            <li><strong style="color:var(--amber)">RAM = Context Window</strong> — finite working memory; the model pages info in and out</li>
-            <li><strong style="color:var(--purple)">CPU = GPU Inference</strong> — the forward pass generating each token</li>
+            <li><strong style="color:var(--cyan)">磁盘 = 互联网 / 文件</strong> ——按需浏览或通过 RAG 检索</li>
+            <li><strong style="color:var(--amber)">内存 = 上下文窗口</strong> ——有限的工作记忆；模型分页进出信息</li>
+            <li><strong style="color:var(--purple)">CPU = GPU 推理</strong> ——生成每个 token 的前向传播</li>
           </ul>
         </div>
         <div class="insight-box" style="margin:0">
-          <strong>Where the Field Is Headed</strong>
+          <strong>领域发展方向</strong>
           <ul style="margin:10px 0 0;padding-left:18px;line-height:2">
-            <li><strong style="color:var(--cyan)">System 2 Thinking</strong> — converting time into accuracy; "take 30 minutes, don't rush"</li>
-            <li><strong style="color:var(--amber)">Self-Improvement</strong> — the AlphaGo question: can LLMs surpass human-level answers once a reward signal exists?</li>
-            <li><strong style="color:var(--green)">Customization</strong> — an app store of specialized LLM experts for narrow tasks</li>
-            <li><strong style="color:var(--red)">Multimodality</strong> — text, images, audio, and video unified in one model</li>
+            <li><strong style="color:var(--cyan)">系统 2 思考</strong> ——将时间转化为精度；"花 30 分钟，不要急"</li>
+            <li><strong style="color:var(--amber)">自我改进</strong> ——AlphaGo 问题：一旦存在奖励信号，LLM 能否超越人类水平的答案？</li>
+            <li><strong style="color:var(--green)">定制化</strong> ——针对狭窄任务的专业 LLM 专家应用商店</li>
+            <li><strong style="color:var(--red)">多模态</strong> ——文本、图像、音频和视频统一在一个模型中</li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="fade-up" style="text-align:center;margin-top:60px">
-      <p class="body-text" style="max-width:560px;margin:0 auto;color:var(--txt2)">Built from Andrej Karpathy's <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener" style="color:var(--accent)">"Intro to Large Language Models"</a> lecture — all facts, figures, and framings traced back to that source. Interactive visualizations built with AI assistance. The most important takeaway: every word generated is a probabilistic sample — a biased coin flip, at 100K-way scale, billions of times.</p>
-      <p class="body-text" style="max-width:560px;margin:12px auto 0;font-size:13.5px;color:var(--txt2)">This was <a href="https://news.ycombinator.com/item?id=47886517" target="_blank" rel="noopener" style="color:var(--accent)">posted to Hacker News</a> and drew heated debate about it being LLM-generated. That's a fair observation — the implementation was AI-assisted. But the content isn't the AI's: every claim, figure, and framing in this guide comes directly from Karpathy's lecture, not from a model hallucinating about LLMs.</p>
+      <p class="body-text" style="max-width:560px;margin:0 auto;color:var(--txt2)">基于 Andrej Karpathy 的<a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noopener" style="color:var(--accent)">"大语言模型入门"</a>讲座——所有事实、数据和框架都追溯至该来源。交互式可视化由 AI 辅助构建。最重要的收获：生成的每个词都是概率采样——一次有偏的抛硬币，在 10 万种可能性中，数十亿次。</p>
+      <p class="body-text" style="max-width:560px;margin:12px auto 0;font-size:13.5px;color:var(--txt2)">这篇文章被<a href="https://news.ycombinator.com/item?id=47886517" target="_blank" rel="noopener" style="color:var(--accent)">发布到 Hacker News</a>，引发了关于它是 LLM 生成的激烈讨论。这是一个公平的观察——实现是 AI 辅助的。但内容不是 AI 的：本指南中的每个论断、数据和框架都直接来自 Karpathy 的讲座，而不是模型对 LLM 的幻觉。</p>
       <p style="margin-top:16px;font-family:var(--ds);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2)">
-        <a href="https://news.ycombinator.com/item?id=47886517" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">HN discussion</a>
+        <a href="https://news.ycombinator.com/item?id=47886517" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">HN 讨论</a>
         <span style="margin:0 12px;opacity:.4">·</span>
         <a href="https://github.com/ynarwal/how-llms-work" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">GitHub</a>
         <span style="margin:0 12px;opacity:.4">·</span>
-        <a href="transcript.txt" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">Full lecture transcript</a>
+        <a href="transcript.txt" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">完整讲座转录</a>
         <span style="margin:0 12px;opacity:.4">·</span>
-        <a href="hn-update-comment.txt" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">HN update note</a>
+        <a href="hn-update-comment.txt" target="_blank" rel="noopener" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">HN 更新说明</a>
         <span style="margin:0 12px;opacity:.4">·</span>
-        <a href="report.html" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">LLM council report</a>
+        <a href="report.html" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">LLM 委员会报告</a>
         <span style="margin:0 12px;opacity:.4">·</span>
-        <a href="v1.html" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">v1 (original)</a>
+        <a href="v1.html" style="color:var(--txt2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px;transition:.2s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--txt2)';this.style.borderColor='var(--border)'">v1（原版）</a>
         <span style="margin:0 12px;opacity:.4">·</span>
-        <a href="how-to-use-llms/index.html" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(99,91,255,0.4);padding-bottom:1px;transition:.2s;font-weight:600" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(99,91,255,0.4)'">Part 2: How to Use LLMs →</a>
+        <a href="how-to-use-llms/index.html" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(99,91,255,0.4);padding-bottom:1px;transition:.2s;font-weight:600" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(99,91,255,0.4)'">第 2 部分：如何使用 LLM →</a>
       </p>
     </div>
   </div>

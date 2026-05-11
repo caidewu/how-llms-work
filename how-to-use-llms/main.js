@@ -55,10 +55,10 @@
 (function(){
   const el = document.getElementById('tw-response');
   const messages = [
-    "It has no memory of you, its knowledge is 6–12 months stale, and every answer is a probabilistic sample. Treat it like a brilliant intern — not an oracle.",
-    "For timeless knowledge, skip web search — the weights are enough. For anything recent, time-sensitive, or esoteric — enable search or use Perplexity.",
-    "Voice removes half the friction. Super Whisper can route ~50% of your queries hands-free. Switch to typing for product names and library names Whisper gets wrong.",
-    "Thinking models (o1, o3) are for hard problems. They're slower and pricier — don't waste them on simple tasks. Claude Sonnet often beats o1 Pro on nuanced code."
+    "它没有关于你的记忆，知识已过时 6–12 个月，每个答案都是概率性采样。把它当作一个聪明的实习生 — 而不是全知者。",
+    "对于永恒知识，跳过网页搜索 — 权重已足够。对于任何近期、时效性强或冷门的内容 — 启用搜索或使用 Perplexity。",
+    "语音消除了一半的摩擦。Super Whisper 可以免手处理约 50% 的查询。产品名称和库名称 Whisper 经常出错时，切换为打字输入。",
+    "思考模型（o1, o3）用于难题。它们更慢更贵 — 不要在简单任务上浪费。Claude Sonnet 在细致代码上经常击败 o1 Pro。"
   ];
   let mi = 0, ci = 0, deleting = false;
 
@@ -96,14 +96,14 @@
   const runBtn = document.getElementById('thinking-run-btn');
 
   const steps = [
-    { icon: '🔍', text: "Let me think about what it means for a number to be odd..." },
-    { icon: '📐', text: "An odd number can be written as 2k+1 for some integer k. Let me use that definition." },
-    { icon: '🔄', text: "If I have two odd numbers: a = 2j+1 and b = 2k+1..." },
-    { icon: '➕', text: "Their sum: a + b = (2j+1) + (2k+1) = 2j + 2k + 2 = 2(j+k+1)" },
-    { icon: '✓', text: "Since j+k+1 is an integer, 2(j+k+1) is divisible by 2 — which is the definition of even." },
+    { icon: '🔍', text: "让我想想一个数是奇数意味着什么..." },
+    { icon: '📐', text: "奇数可以写成 2k+1 的形式，其中 k 是某个整数。我用这个定义。" },
+    { icon: '🔄', text: "如果有两个奇数：a = 2j+1 和 b = 2k+1..." },
+    { icon: '➕', text: "它们的和：a + b = (2j+1) + (2k+1) = 2j + 2k + 2 = 2(j+k+1)" },
+    { icon: '✓', text: "由于 j+k+1 是整数，2(j+k+1) 可被 2 整除 — 这就是偶数的定义。" },
   ];
 
-  const answer = "Let two odd integers be a = 2j+1 and b = 2k+1. Then a+b = 2j+1 + 2k+1 = 2(j+k+1). Since j+k+1 ∈ ℤ, the sum is even. □";
+  const answer = "设两个奇整数为 a = 2j+1 和 b = 2k+1。则 a+b = 2j+1 + 2k+1 = 2(j+k+1)。由于 j+k+1 ∈ ℤ，该和为偶数。□";
 
   let running = false;
 
@@ -111,14 +111,14 @@
     if (running) return;
     running = true;
     runBtn.disabled = true;
-    runBtn.textContent = 'Thinking...';
+    runBtn.textContent = '思考中...';
     stepsEl.innerHTML = '';
     answerEl.style.display = 'none';
 
     let elapsed = 0;
     const timer = setInterval(() => {
       elapsed++;
-      timeEl.textContent = `thinking for ${elapsed}s...`;
+      timeEl.textContent = `已思考 ${elapsed} 秒...`;
     }, 1000);
 
     steps.forEach((step, i) => {
@@ -132,11 +132,11 @@
 
     setTimeout(() => {
       clearInterval(timer);
-      timeEl.textContent = `thought for ${steps.length - 1}s`;
+      timeEl.textContent = `思考了 ${steps.length - 1} 秒`;
       answerEl.style.display = 'block';
       contentEl.textContent = answer;
       runBtn.disabled = false;
-      runBtn.textContent = '↺ Run again';
+      runBtn.textContent = '↺ 再次运行';
       running = false;
     }, steps.length * 700 + 300);
   });
@@ -160,7 +160,7 @@
     if (running) return;
     running = true;
     runBtn.disabled = true;
-    runBtn.textContent = 'Simulating...';
+    runBtn.textContent = '模拟中...';
     resetSteps();
 
     const timings = [0, 800, 1700, 2700];
@@ -174,7 +174,7 @@
     setTimeout(() => {
       resultEl.style.display = 'block';
       runBtn.disabled = false;
-      runBtn.textContent = '↺ Simulate again';
+      runBtn.textContent = '↺ 再次模拟';
       running = false;
     }, 3700);
   }
@@ -292,7 +292,7 @@
       steps[2].style.display = 'block';
       drawChart();
       runBtn.disabled = false;
-      runBtn.textContent = '↺ Run again';
+      runBtn.textContent = '↺ 再次运行';
       running = false;
     }, 2400);
   });
@@ -321,7 +321,7 @@
       } else {
         clearInterval(interval);
         runBtn.disabled = false;
-        runBtn.textContent = '↺ Animate again';
+        runBtn.textContent = '↺ 再次播放';
         running = false;
       }
     }, 600);

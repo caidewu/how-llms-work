@@ -1,5 +1,5 @@
-// Scale canvas to device pixel ratio, mapping nativeW×nativeH coordinate space
-// to the full CSS display area so drawings look crisp on Retina.
+// 将 canvas 缩放到设备像素比，将 nativeW×nativeH 坐标空间
+// 映射到完整的 CSS 显示区域，使绘图在 Retina 屏幕上看起来清晰。
 function scaleCanvas(canvas, nativeW, nativeH) {
   const dpr = window.devicePixelRatio || 1;
   const cssW = canvas.offsetWidth || nativeW;
@@ -12,7 +12,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 }
 
 // ═══════════════════════════════════════════════
-// HERO CANVAS — Floating Math/Code Fragments
+// HERO CANVAS — 漂浮的数学/代码片段
 // ═══════════════════════════════════════════════
 (function(){
   const canvas = document.getElementById('hero-canvas');
@@ -70,10 +70,10 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   const el = document.getElementById('tw-response');
   if (!el) return;
   const messages = [
-    "A neural network is a function with millions of adjustable knobs (weights). Training turns the knobs until the function's outputs match the examples it's shown.",
-    "Every word GPT generates is computed by the same forward pass you'll build here — just with 405 billion weights instead of 19.",
-    "Backpropagation isn't magic: it's the chain rule applied recursively. Every weight gets told exactly how much it contributed to the error.",
-    "Gradient descent is just: move each weight a tiny step in the direction that reduces the loss. Repeat a billion times. That's training."
+    "神经网络是一个拥有数百万可调旋钮（权重）的函数。训练就是转动这些旋钮，直到函数的输出与它看到的示例相匹配。",
+    "GPT 生成的每个词都是通过你在这里将要构建的前向传播计算的 —— 只是它有 4050 亿个权重而不是 19 个。",
+    "反向传播不是魔法：它是递归应用的链式法则。每个权重都被告知它对误差的贡献有多大。",
+    "梯度下降就是：将每个权重朝减少损失的方向移动一小步。重复十亿次。这就是训练。"
   ];
   let mi = 0, ci = 0, deleting = false;
 
@@ -166,7 +166,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   if (!svg) return;
 
   const layers = [[60, [40,80,120,160]], [170, [60,100,140]], [280, [100]]];
-  const labels = ['Input\n(4)', 'Hidden\n(3)', 'Output\n(1)'];
+  const labels = ['输入\n(4)', '隐藏层\n(3)', '输出\n(1)'];
   const colors = ['#946800', '#635BFF', '#00875A'];
   let html = '';
 
@@ -213,12 +213,12 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     document.getElementById('np-raw').textContent = raw.toFixed(3);
     document.getElementById('np-out').textContent = out.toFixed(3);
 
-    // Draw neuron diagram
+    // 绘制神经元示意图
     const W = 400, H = 160;
     scaleCanvas(canvas, W, H);
     ctx.clearRect(0, 0, W, H);
 
-    // Input nodes
+    // 输入节点
     const inputs = [
       {label: `x₁=0.5`, val: `×${w1.toFixed(2)}`, color: '#946800', y: H*0.3},
       {label: `x₂=-0.3`, val: `×${w2.toFixed(2)}`, color: '#0570DE', y: H*0.7}
@@ -231,18 +231,18 @@ function scaleCanvas(canvas, nativeW, nativeH) {
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillText(inp.label, 60, inp.y);
 
-      // Weight label on line
+      // 连线上的权重标签
       ctx.beginPath(); ctx.moveTo(80, inp.y); ctx.lineTo(200, H/2);
       ctx.strokeStyle = inp.color+'55'; ctx.lineWidth = 1; ctx.stroke();
       ctx.fillStyle = inp.color+'bb'; ctx.font = '9px JetBrains Mono';
       ctx.fillText(inp.val, 135, (inp.y + H/2)/2 + (inp.y < H/2 ? -8 : 8));
     });
 
-    // Bias
+    // 偏置
     ctx.fillStyle = '#697386'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'center';
     ctx.fillText(`b=${b.toFixed(2)}`, 205, H*0.12);
 
-    // Sum node
+    // 求和节点
     ctx.beginPath(); ctx.arc(220, H/2, 28, 0, Math.PI*2);
     const rawCol = raw > 0 ? '#635BFF' : '#DF1B41';
     ctx.fillStyle = rawCol+'22'; ctx.fill();
@@ -251,13 +251,13 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     ctx.fillText(raw.toFixed(2), 220, H/2 - 7);
     ctx.fillText('Σ+b', 220, H/2 + 7);
 
-    // Arrow to tanh
+    // 指向 tanh 的箭头
     ctx.beginPath(); ctx.moveTo(248, H/2); ctx.lineTo(290, H/2);
     ctx.strokeStyle = '#E3E8EF'; ctx.lineWidth = 1.5; ctx.stroke();
     ctx.fillStyle = '#697386'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'center';
     ctx.fillText('tanh', 269, H/2 - 10);
 
-    // Output node
+    // 输出节点
     const outMapped = (out + 1) / 2;
     const hue = Math.round(outMapped * 140);
     const outCol = `hsl(${hue},60%,40%)`;
@@ -281,8 +281,8 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   const resetBtn = document.getElementById('fp-reset-btn');
   if (!svg || !runBtn) return;
 
-  // Hardcoded tiny network: 2 inputs → 3 hidden → 1 output
-  // weights chosen to give interesting values
+  // 硬编码的小型网络: 2 输入 → 3 隐藏 → 1 输出
+  // 权重选择为使数值有趣
   const W1 = [[0.3,-0.5],[0.8,0.2],[-0.4,0.6]];
   const B1 = [0.1, -0.2, 0.3];
   const W2 = [[0.7,-0.3,0.5]];
@@ -291,7 +291,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 
   function tanh(x) { return Math.tanh(x); }
 
-  // Node positions
+  // 节点位置
   const nodes = {
     i0: {x:40, y:70, layer:0},
     i1: {x:40, y:130, layer:0},
@@ -306,7 +306,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     ['h0','o0',W2[0][0]], ['h1','o0',W2[0][1]], ['h2','o0',W2[0][2]]
   ];
 
-  let phase = 0; // 0=idle, 1=input lit, 2=hidden lit, 3=output lit
+  let phase = 0; // 0=空闲, 1=输入亮起, 2=隐藏层亮起, 3=输出亮起
   const nodeVals = {};
 
   function computeVals() {
@@ -321,18 +321,18 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     const litLayers = phase === 0 ? [] : phase === 1 ? [0] : phase === 2 ? [0,1] : [0,1,2];
 
     let html = '';
-    // Edges
+    // 边
     edges.forEach(([from, to]) => {
       const f = nodes[from], t = nodes[to];
       const lit = litLayers.includes(f.layer) && litLayers.includes(t.layer);
       html += `<line x1="${f.x}" y1="${f.y}" x2="${t.x}" y2="${t.y}" stroke="${lit?'#635BFF44':'#E3E8EF'}" stroke-width="${lit?1.5:1}"/>`;
     });
-    // Nodes
+    // 节点
     Object.entries(nodes).forEach(([id, {x, y, layer}]) => {
       const lit = litLayers.includes(layer);
       const val = nodeVals[id];
       const color = ['#946800','#635BFF','#00875A'][layer];
-      html += `<circle cx="${x}" cy="${y}" r="18" fill="${lit?color+'33':'var(--surface)'}" stroke="${lit?color+'aa':'#E3E8EF'}" stroke-width="${lit?2:1}"/>`;
+      html += `<circle cx="${x}" cy="${y}" r="18" fill="${lit?color+'33':'var(--surface')}" stroke="${lit?color+'aa':'#E3E8EF'}" stroke-width="${lit?2:1}"/>`;
       if (lit && val !== undefined) {
         html += `<text x="${x}" y="${y+4}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${color}">${val.toFixed(2)}</text>`;
       } else {
@@ -340,8 +340,8 @@ function scaleCanvas(canvas, nativeW, nativeH) {
         html += `<text x="${x}" y="${y+4}" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#697386">${lbl}</text>`;
       }
     });
-    // Labels
-    [[40,195,'Input\nx=[1.0, 0.5]'],[160,195,'Hidden\n(tanh)'],[290,195,'Output']].forEach(([x,y,lbl]) => {
+    // 标签
+    [[40,195,'输入\nx=[1.0, 0.5]'],[160,195,'隐藏层\n(tanh)'],[290,195,'输出']].forEach(([x,y,lbl]) => {
       lbl.split('\n').forEach((line, i) => {
         html += `<text x="${x}" y="${y + i*13}" text-anchor="middle" font-family="Inter" font-size="9" fill="#697386">${line}</text>`;
       });
@@ -377,13 +377,13 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   if (!canvas || !stepBtn) return;
 
   const ctx = canvas.getContext('2d');
-  let w = 3.0; // starting far from minimum at w=0
+  let w = 3.0; // 从 w=0 的最小值远处开始
 
-  const NW = 400, NH = 160; // logical coordinate space
+  const NW = 400, NH = 160; // 逻辑坐标空间
 
-  // Loss function: L(w) = w² + 0.3 (minimum at w=0, loss=0.3)
+  // 损失函数: L(w) = w² + 0.3 (最小值在 w=0, loss=0.3)
   function loss(w) { return w * w + 0.3; }
-  function dloss(w) { return 2 * w; } // derivative
+  function dloss(w) { return 2 * w; } // 导数
 
   function wToX(w) { return ((w + 4) / 8) * NW; }
   function lossToY(l) { return NH - 10 - (l / 18) * (NH - 20); }
@@ -393,14 +393,14 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     const W = NW, H = NH;
     ctx.clearRect(0, 0, W, H);
 
-    // Grid
+    // 网格
     ctx.strokeStyle = '#F0F4F8'; ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
       const y = lossToY(i * 4);
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
     }
 
-    // Loss curve
+    // 损失曲线
     ctx.beginPath();
     for (let px = 0; px <= W; px++) {
       const wv = (px / W) * 8 - 4;
@@ -409,25 +409,25 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     }
     ctx.strokeStyle = '#635BFF'; ctx.lineWidth = 2; ctx.stroke();
 
-    // Minimum marker
+    // 最小值标记
     ctx.beginPath(); ctx.arc(wToX(0), lossToY(0.3), 4, 0, Math.PI*2);
     ctx.fillStyle = '#00875A'; ctx.fill();
 
-    // Ball (current position)
+    // 小球（当前位置）
     const bx = wToX(w), by = lossToY(loss(w));
     ctx.beginPath(); ctx.arc(bx, by, 8, 0, Math.PI*2);
     ctx.fillStyle = '#DF1B41'; ctx.fill();
     ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
 
-    // Labels
+    // 标签
     ctx.fillStyle = '#697386'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'left';
-    ctx.fillText('Loss ↑', 6, 16);
+    ctx.fillText('损失 ↑', 6, 16);
     ctx.textAlign = 'center';
-    ctx.fillText('weight →', W/2, H - 2);
+    ctx.fillText('权重 →', W/2, H - 2);
     ctx.fillStyle = '#00875A';
-    ctx.fillText('min', wToX(0), lossToY(0.3) - 10);
+    ctx.fillText('最小值', wToX(0), lossToY(0.3) - 10);
 
-    // Current values display
+    // 当前值显示
     document.getElementById('loss-w-val').textContent = w.toFixed(3);
     document.getElementById('loss-val-display').textContent = loss(w).toFixed(3);
   }
@@ -440,7 +440,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 
   stepBtn.addEventListener('click', () => {
     const lr = parseFloat(lrSlider.value);
-    w -= lr * dloss(w); // gradient descent step
+    w -= lr * dloss(w); // 梯度下降步
     draw();
   });
 
@@ -455,12 +455,12 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let dragging = false;
-  let xVal = 1.0; // current x position
+  let xVal = 1.0; // 当前 x 位置
 
   const PAD = 30;
   const X_RANGE = [-3, 3];
   const Y_RANGE = [-0.5, 9.5];
-  const CW = 400, CH = 200; // logical coordinate space
+  const CW = 400, CH = 200; // 逻辑坐标空间
 
   function xToCanvas(x) { return PAD + ((x - X_RANGE[0]) / (X_RANGE[1] - X_RANGE[0])) * (CW - 2*PAD); }
   function yToCanvas(y) { return PAD + ((Y_RANGE[1] - y) / (Y_RANGE[1] - Y_RANGE[0])) * (CH - 2*PAD); }
@@ -474,12 +474,12 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     const W = CW, H = CH;
     ctx.clearRect(0, 0, W, H);
 
-    // Axes
+    // 坐标轴
     ctx.strokeStyle = '#E3E8EF'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(PAD, yToCanvas(0)); ctx.lineTo(W-PAD, yToCanvas(0)); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(xToCanvas(0), PAD); ctx.lineTo(xToCanvas(0), H-PAD); ctx.stroke();
 
-    // f(x) = x² curve
+    // f(x) = x² 曲线
     ctx.beginPath();
     for (let px = PAD; px <= W-PAD; px++) {
       const x = canvasToX(px);
@@ -489,7 +489,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     }
     ctx.strokeStyle = '#635BFF'; ctx.lineWidth = 2.5; ctx.stroke();
 
-    // Tangent line: y = f(xVal) + df(xVal)*(x - xVal)
+    // 切线: y = f(xVal) + df(xVal)*(x - xVal)
     const slope = df(xVal);
     const intercept = f(xVal) - slope * xVal;
     const tx1 = Math.max(X_RANGE[0], xVal - 1.5);
@@ -500,24 +500,24 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     ctx.strokeStyle = '#DF1B41'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]); ctx.stroke();
     ctx.setLineDash([]);
 
-    // Point on curve
+    // 曲线上的点
     const px = xToCanvas(xVal), py = yToCanvas(f(xVal));
     ctx.beginPath(); ctx.arc(px, py, 7, 0, Math.PI*2);
     ctx.fillStyle = '#DF1B41'; ctx.fill();
     ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
 
-    // Slope label
+    // 斜率标签
     ctx.fillStyle = '#DF1B41'; ctx.font = 'bold 11px JetBrains Mono'; ctx.textAlign = 'center';
-    ctx.fillText(`slope = ${slope.toFixed(2)}`, px, py - 14);
+    ctx.fillText(`斜率 = ${slope.toFixed(2)}`, px, py - 14);
 
-    // Axis labels
+    // 坐标轴标签
     ctx.fillStyle = '#697386'; ctx.font = '10px Inter'; ctx.textAlign = 'center';
     ctx.fillText('f(x) = x²', xToCanvas(2.5), yToCanvas(8));
     ctx.fillText('x', W - PAD + 10, yToCanvas(0) + 4);
     ctx.textAlign = 'left';
     ctx.fillText('f(x)', xToCanvas(0) + 4, PAD + 10);
 
-    // Update stat labels
+    // 更新统计标签
     document.getElementById('deriv-x').textContent = xVal.toFixed(2);
     document.getElementById('deriv-fx').textContent = f(xVal).toFixed(2);
     document.getElementById('deriv-dfx').textContent = slope.toFixed(2);
@@ -526,7 +526,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   function getX(e) {
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    // Map CSS mouse position into logical CW coordinate space
+    // 将 CSS 鼠标位置映射到逻辑 CW 坐标空间
     const px = (clientX - rect.left) / rect.width * CW;
     return Math.max(X_RANGE[0], Math.min(X_RANGE[1], canvasToX(px)));
   }
@@ -552,11 +552,11 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   const resetBtn = document.getElementById('graph-reset-btn');
   if (!svg || !fwdBtn) return;
 
-  // Expression: a=2, b=-3
+  // 表达式: a=2, b=-3
   // c = a * b = -6
   // d = c + a = -4
   // e = tanh(d) ≈ -0.9993
-  // Gradients (backprop from e=1.0):
+  // 梯度 (从 e=1.0 反向传播):
   // de/de = 1.0
   // de/dd = 1 - tanh²(d) ≈ 0.0007
   // de/dc = de/dd * 1 = 0.0007
@@ -583,7 +583,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   function render() {
     let html = '';
 
-    // Edges
+    // 边
     edges.forEach(({from, to, label}) => {
       const f = nodes[from], t = nodes[to];
       html += `<line x1="${f.x+24}" y1="${f.y}" x2="${t.x-28}" y2="${t.y}" stroke="#E3E8EF" stroke-width="1.5"/>`;
@@ -591,7 +591,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
       html += `<text x="${mx}" y="${my-5}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#697386">${label}</text>`;
     });
 
-    // Nodes
+    // 节点
     Object.values(nodes).forEach(node => {
       const isLeaf = node.label === 'a' || node.label === 'b';
       const isOut = node.label.startsWith('e=');
@@ -615,10 +615,10 @@ function scaleCanvas(canvas, nativeW, nativeH) {
       }
     });
 
-    // Legend
-    html += `<text x="10" y="245" font-family="Inter" font-size="10" fill="#697386">a=2, b=-3. Forward: multiply → add → tanh.</text>`;
+    // 图例
+    html += `<text x="10" y="245" font-family="Inter" font-size="10" fill="#697386">a=2, b=-3. 前向: 乘法 → 加法 → tanh.</text>`;
     if (showGrads) {
-      html += `<text x="10" y="258" font-family="Inter" font-size="10" fill="#635BFF">Backprop: gradients flow right→left via chain rule.</text>`;
+      html += `<text x="10" y="258" font-family="Inter" font-size="10" fill="#635BFF">反向传播: 梯度从右→左通过链式法则流动.</text>`;
     }
 
     svg.innerHTML = html;
@@ -646,14 +646,14 @@ function scaleCanvas(canvas, nativeW, nativeH) {
 })();
 
 // ═══════════════════════════════════════════════
-// §8 TRAINING LOSS CANVAS (auto-animates on scroll)
+// §8 TRAINING LOSS CANVAS (滚动时自动动画)
 // ═══════════════════════════════════════════════
 (function(){
   const canvas = document.getElementById('training-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  // Simulated loss curve: loss(step) = 4.5 * e^(-0.05*step) + 0.05
+  // 模拟损失曲线: loss(step) = 4.5 * e^(-0.05*step) + 0.05
   function simulatedLoss(step) { return 4.5 * Math.exp(-0.05 * step) + 0.05; }
 
   const totalSteps = 80;
@@ -670,7 +670,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     const plotH = H - PAD.top - PAD.bottom;
     const maxLoss = 5;
 
-    // Grid lines
+    // 网格线
     ctx.strokeStyle = '#F0F4F8'; ctx.lineWidth = 1;
     [0,1,2,3,4,5].forEach(l => {
       const y = PAD.top + plotH - (l/maxLoss)*plotH;
@@ -679,7 +679,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
       ctx.fillText(l.toFixed(0), PAD.left-4, y+3);
     });
 
-    // Loss curve (up to drawn steps)
+    // 损失曲线 (到当前绘制步数)
     if (drawn > 0) {
       ctx.beginPath();
       for (let s = 0; s <= drawn; s++) {
@@ -692,21 +692,21 @@ function scaleCanvas(canvas, nativeW, nativeH) {
       grad.addColorStop(1, '#00875A');
       ctx.strokeStyle = grad; ctx.lineWidth = 2.5; ctx.stroke();
 
-      // Current point
+      // 当前点
       const cx = PAD.left + (drawn/totalSteps)*plotW;
       const cy = PAD.top + plotH - (simulatedLoss(drawn)/maxLoss)*plotH;
       ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2);
       ctx.fillStyle = drawn >= totalSteps ? '#00875A' : '#DF1B41'; ctx.fill();
     }
 
-    // Axes
+    // 坐标轴
     ctx.strokeStyle = '#E3E8EF'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(PAD.left, PAD.top); ctx.lineTo(PAD.left, H-PAD.bottom); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(PAD.left, H-PAD.bottom); ctx.lineTo(W-PAD.right, H-PAD.bottom); ctx.stroke();
 
     ctx.fillStyle = '#697386'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'center';
-    ctx.fillText('Training Steps →', W/2, H-4);
-    ctx.save(); ctx.rotate(-Math.PI/2); ctx.fillText('Loss', -H/2, 12); ctx.restore();
+    ctx.fillText('训练步数 →', W/2, H-4);
+    ctx.save(); ctx.rotate(-Math.PI/2); ctx.fillText('损失', -H/2, 12); ctx.restore();
   }
 
   function animate() {

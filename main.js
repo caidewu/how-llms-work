@@ -5,7 +5,7 @@
   const canvas = document.getElementById('hero-canvas');
   const ctx = canvas.getContext('2d');
   let W, H, tokens = [], animId;
-  const WORDS = ['the','of','and','a ','to','in ','is ','it ','ing','tion','pre','er ','un','re ','ed ','ly ','ness','ment','ize','BPE','seq','dim','MLP','key','vec','loss','grad','mask','head','norm','next','data','text','byte','GPT','LLM','soft','max','Adam','logit','embed','token','layer','atten'];
+  const WORDS = ['的','了','是','在','和','to ','in ','is ','it ','ing','tion','pre','er ','un','re ','ed ','ly ','ness','ment','ize','BPE','seq','dim','MLP','key','vec','loss','grad','mask','head','norm','next','data','text','byte','GPT','LLM','soft','max','Adam','logit','embed','token','layer','atten'];
 
   function resize() {
     const dpr = window.devicePixelRatio || 1;
@@ -65,9 +65,9 @@
 (function(){
   const el = document.getElementById('tw-response');
   const messages = [
-    "It's a large language model — a neural network with 405 billion parameters trained to predict the next token in a sequence...",
-    "The magic is in the weights: 15 trillion tokens of training data compressed into parameters that encode human knowledge...",
-    "Every word you see is sampled from a probability distribution over 100,277 possible tokens. There's no magic — just math at scale."
+    "它是一个大语言模型——一个拥有4050亿参数的神经网络，被训练用来预测序列中的下一个token……",
+    "魔力在于权重：15万亿token的训练数据被压缩成编码人类知识的参数……",
+    "你看到的每一个词都是从100,277个可能token的概率分布中采样而来。没有魔法——只是规模化的数学。"
   ];
   let mi = 0, ci = 0, deleting = false, pauseTimer = null;
 
@@ -100,11 +100,11 @@
 (function(){
   const svg = document.getElementById('bpe-svg');
   const steps = [
-    { label: 'Raw Text', tokens: ['t','o','k','e','n','i','z','a','t','i','o','n'], desc: 'Start: individual characters' },
-    { label: 'Bytes (UTF-8)', tokens: ['116','111','107','101','110','105','122','97','116','105','111','110'], desc: 'Encode to byte IDs (0–255)' },
-    { label: 'After BPE merge 1', tokens: ['to','k','en','i','za','ti','on'], desc: 'Merge frequent pairs' },
-    { label: 'After BPE merge 2', tokens: ['token','iza','tion'], desc: 'Continue merging' },
-    { label: 'Final Tokens', tokens: ['token','ization'], desc: 'GPT-4: 2 tokens for this word' }
+    { label: '原始文本', tokens: ['t','o','k','e','n','i','z','a','t','i','o','n'], desc: '起始：单个字符' },
+    { label: '字节 (UTF-8)', tokens: ['116','111','107','101','110','105','122','97','116','105','111','110'], desc: '编码为字节 ID (0–255)' },
+    { label: 'BPE 合并 1', tokens: ['to','k','en','i','za','ti','on'], desc: '合并频繁出现的字符对' },
+    { label: 'BPE 合并 2', tokens: ['token','iza','tion'], desc: '继续合并' },
+    { label: '最终 Token', tokens: ['token','ization'], desc: 'GPT-4：这个词用 2 个 token' }
   ];
   let step = 0;
 
@@ -124,7 +124,7 @@
     });
 
     html += `<rect x="10" y="82" width="360" height="1" fill="#E3E8EF"/>`;
-    html += `<text x="10" y="100" font-family="JetBrains Mono" font-size="10" fill="#697386">TOKENS: ${s.tokens.length}</text>`;
+    html += `<text x="10" y="100" font-family="JetBrains Mono" font-size="10" fill="#697386">词元数: ${s.tokens.length}</text>`;
     html += `<text x="370" y="100" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#635BFF">${s.label}</text>`;
 
     steps.forEach((_, i) => {
@@ -134,16 +134,16 @@
       html += `<text x="${cx}" y="150" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="${i === step ? '#635BFF' : '#697386'}">${i+1}</text>`;
     });
 
-    html += `<text x="190" y="185" text-anchor="middle" font-family="Barlow Condensed" font-size="11" fill="#697386" letter-spacing="1">CLICK TO ADVANCE</text>`;
+    html += `<text x="190" y="185" text-anchor="middle" font-family="Barlow Condensed" font-size="11" fill="#697386" letter-spacing="1">点击继续</text>`;
 
     const barW = Math.max(8, Math.min(340, step === 4 ? 340 * (2/100277) * 10000 : step === 0 ? 30 : step === 1 ? 80 : step === 2 ? 160 : 260));
     html += `<rect x="20" y="205" width="340" height="6" rx="0" fill="#F6F9FC"/>`;
     html += `<rect x="20" y="205" width="${barW}" height="6" rx="0" fill="url(#grad)"/>`;
     html += `<defs><linearGradient id="grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#635BFF"/><stop offset="1" stop-color="#946800"/></linearGradient></defs>`;
-    html += `<text x="20" y="225" font-family="JetBrains Mono" font-size="9" fill="#697386">SEQUENCE LENGTH →</text>`;
-    html += `<text x="360" y="225" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#697386">← VOCAB SIZE</text>`;
+    html += `<text x="20" y="225" font-family="JetBrains Mono" font-size="9" fill="#697386">序列长度 →</text>`;
+    html += `<text x="360" y="225" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#697386">← 词表大小</text>`;
 
-    const annotations = ['12 symbols (chars)','12 symbols (bytes: 0–255)','7 tokens','3 tokens','2 tokens ✓'];
+    const annotations = ['12 个符号 (字符)','12 个符号 (字节: 0–255)','7 个 token','3 个 token','2 个 token ✓'];
     html += `<text x="190" y="260" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#1A1F36">${annotations[step]}</text>`;
 
     svg.innerHTML = html;
@@ -153,7 +153,7 @@
     step = (step + 1) % steps.length;
     renderStep();
     const lbl = document.getElementById('bpe-step-label');
-    if (lbl) lbl.textContent = `Step ${step + 1} of ${steps.length}`;
+    if (lbl) lbl.textContent = `步骤 ${step + 1} / ${steps.length}`;
   }
 
   renderStep();
@@ -169,13 +169,13 @@
 (function(){
   const svg = document.getElementById('transformer-svg');
   const layers = [
-    { label: 'Input Tokens', color: '#946800', y: 310 },
-    { label: 'Token Embedding', color: '#946800', y: 272 },
-    { label: 'Multi-Head Attention', color: '#635BFF', y: 220 },
-    { label: 'Feed Forward (MLP)', color: '#0570DE', y: 168 },
-    { label: 'Layer Norm + Residual', color: '#697386', y: 130 },
-    { label: '× N Transformer Blocks', color: '#9B8E86', y: 95 },
-    { label: 'Output Logits', color: '#00875A', y: 50 },
+    { label: '输入 Token', color: '#946800', y: 310 },
+    { label: 'Token 嵌入', color: '#946800', y: 272 },
+    { label: '多头注意力', color: '#635BFF', y: 220 },
+    { label: '前馈网络 (MLP)', color: '#0570DE', y: 168 },
+    { label: '层归一化 + 残差', color: '#697386', y: 130 },
+    { label: '× N 个 Transformer 块', color: '#9B8E86', y: 95 },
+    { label: '输出 Logits', color: '#00875A', y: 50 },
   ];
 
   let html = '';
@@ -223,9 +223,9 @@
 
   const trainingTexts = {
     1: `<span class="incoherent">wqp mxr tkz bnf opc lsw mzq vdf nrt</span>`,
-    500: `<span class="incoherent">the model has learn</span><span class="coherent">ing</span> <span class="incoherent">but confus</span><span class="coherent">tion</span> <span class="incoherent">still wqp</span> <span class="coherent">the model</span> <span class="incoherent">bns</span> <span class="coherent">to predict</span>...`,
-    5000: `<span class="coherent">The language model learns to predict the next token in a sequence.</span> <span class="incoherent">Training requires many thousands of</span> <span class="coherent">gradient descent steps</span> <span class="incoherent">to converge</span>.`,
-    32000: `<span class="coherent">The neural network has learned the statistical patterns of human language. It can generate coherent text on virtually any topic, answer questions, write code, and engage in multi-turn conversations.</span>`
+    500: `<span class="incoherent">模型已经学会</span><span class="coherent">了</span> <span class="incoherent">但仍然困惑</span><span class="coherent">不解</span> <span class="incoherent">仍然 wqp</span> <span class="coherent">模型</span> <span class="incoherent">bns</span> <span class="coherent">开始预测</span>...`,
+    5000: `<span class="coherent">语言模型学会了预测序列中的下一个 token。</span> <span class="incoherent">训练需要成千上万个</span> <span class="coherent">梯度下降步</span> <span class="incoherent">才能收敛</span>。`,
+    32000: `<span class="coherent">神经网络已经学会了人类语言的统计模式。它可以在几乎任何主题上生成连贯的文本，回答问题，编写代码，并进行多轮对话。</span>`
   };
 
   function drawCurve(upToStep) {
@@ -454,7 +454,7 @@
         span.textContent = newText;
         seqEl.appendChild(span);
 
-        infoEl.textContent = `Sampled "${processed[selectedIdx].t}" (${(processed[selectedIdx].prob * 100).toFixed(1)}% prob)`;
+        infoEl.textContent = `已采样 "${processed[selectedIdx].t}" (${(processed[selectedIdx].prob * 100).toFixed(1)}% 概率)`;
 
         setTimeout(() => {
           updateBars();
@@ -629,9 +629,9 @@
     for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
     ctx.font = '10px JetBrains Mono,monospace';
     ctx.fillStyle = 'rgba(5,112,222,0.3)';
-    ctx.fillText('colony / capital cluster', .06*W, .75*H);
+    ctx.fillText('colony / capital 簇', .06*W, .75*H);
     ctx.fillStyle = 'rgba(123,110,102,0.3)';
-    ctx.fillText('science cluster', .55*W, .52*H);
+    ctx.fillText('science 簇', .55*W, .52*H);
     if (showLines) {
       const q = dots[dots.length-1];
       [dots[0], dots[1]].forEach(d => {
@@ -690,12 +690,12 @@
     if (ansGood) ansGood.style.opacity = '0.3';
     if (goodBadge) goodBadge.style.opacity = '0.3';
     showLines = false; draw();
-    if (runBtn) { runBtn.disabled = false; runBtn.textContent = '▶ Run RAG Query'; }
+    if (runBtn) { runBtn.disabled = false; runBtn.textContent = '▶ 运行 RAG 查询'; }
   }
 
   function runDemo() {
     if (!runBtn) return;
-    runBtn.disabled = true; runBtn.textContent = 'Running…';
+    runBtn.disabled = true; runBtn.textContent = '运行中…';
     const timings = [0, 700, 1400, 2100, 2900, 3700];
     timings.forEach((t, i) => {
       setTimeout(() => {
@@ -707,7 +707,7 @@
         if (i === 5) {
           if (ansGood) ansGood.style.opacity = '1';
           if (goodBadge) goodBadge.style.opacity = '1';
-          runBtn.disabled = false; runBtn.textContent = '▶ Run Again';
+          runBtn.disabled = false; runBtn.textContent = '▶ 再次运行';
         }
       }, t);
     });
